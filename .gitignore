@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# generated during build
+/lib/shared/utils/l10n/
+lib/shared/di/injection.config.dart

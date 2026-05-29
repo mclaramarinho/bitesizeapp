@@ -1,0 +1,37 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "@@_SECTION_LOGIN": "-----------------------------------------",
+  "continue_with_google": "Continue with Google",
+  "signing_in": "Signing in...",
+  "create_your_account": "Create your account",
+  "profile_complete": "Profile complete",
+
+  "@@_SECTION_PROFILE": "-----------------------------------------",
+  "profile": "Profile",
+  "enter_name": "Enter your name",
+  "select_birthdate": "Select your birthdate",
+  "select_country": "Select your country",
+  "complete_ur_profile": "Complete your profile",
+  "save_profile": "Save profile",
+  "signed_up_as": "Signed up as",
+
+
+  "@@_SECTION_AUTH": "-----------------------------------------",
+  "email": "Email",
+  "email_hint": "you@domain.com",
+  "password": "Password",
+  "enter_ur_password": "Enter your password",
+  "confirm_password": "Confirm Password",
+  "reenter_ur_password": "Re-enter your password",
+
+  "@@_SECTION_MISC": "-----------------------------------------",
+  "or": "OR",
+  "done": "Done",
+  "full_name": "Full name",
+  "birthdate": "Birthdate",
+  "tap_to_select": "Tap to select",
+  "country": "Country"
+}

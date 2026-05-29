@@ -1,4 +1,7 @@
+import 'package:adhd_app/shared/utils/extensions/context.dart';
 import 'package:flutter/material.dart';
+
+// TODO - this is going to be rendered conditionally on the CreateAccountPage, depending on the current step of the flow.
 
 class CompleteProfilePage extends StatefulWidget {
   final String? email;
@@ -46,26 +49,26 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Profile complete'),
-        content: Text('Profile: ${profile.toString()}'),
+        title: Text(context.loc.profile_complete),
+        content: Text('${context.loc.profile}: ${profile.toString()}'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
-            child: const Text('Done'),
+            child: Text(context.loc.done),
           )
         ],
       ),
     );
   }
 
-  String? _validateName(String? v) => (v == null || v.trim().isEmpty) ? 'Enter your name' : null;
-  String? _validateBirthdate(_) => _birthdate == null ? 'Select your birthdate' : null;
-  String? _validateCountry(String? v) => (v == null || v.isEmpty) ? 'Select your country' : null;
+  String? _validateName(String? v) => (v == null || v.trim().isEmpty) ? context.loc.enter_name : null;
+  String? _validateBirthdate(_) => _birthdate == null ? context.loc.select_birthdate : null;
+  String? _validateCountry(String? v) => (v == null || v.isEmpty) ? context.loc.select_country : null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Complete your profile')),
+      appBar: AppBar(title: Text(context.loc.complete_ur_profile)),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -75,20 +78,20 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (widget.email != null) ...[
-                  Text('Signed up as ${widget.email}'),
+                  Text('${context.loc.signed_up_as} ${widget.email}'),
                   const SizedBox(height: 12),
                 ],
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Full name'),
+                  decoration: InputDecoration(labelText: context.loc.full_name),
                   validator: _validateName,
                 ),
                 const SizedBox(height: 12),
                 InkWell(
                   onTap: _pickBirthdate,
                   child: InputDecorator(
-                    decoration: InputDecoration(labelText: 'Birthdate', errorText: _validateBirthdate(null)),
-                    child: Text(_birthdate == null ? 'Tap to select' : '${_birthdate!.toLocal()}'.split(' ')[0]),
+                    decoration: InputDecoration(labelText: context.loc.birthdate, errorText: _validateBirthdate(null)),
+                    child: Text(_birthdate == null ? context.loc.tap_to_select : '${_birthdate!.toLocal()}'.split(' ')[0]),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -96,11 +99,11 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                   value: _country,
                   items: _countries.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
                   onChanged: (v) => setState(() => _country = v),
-                  decoration: const InputDecoration(labelText: 'Country'),
+                  decoration: InputDecoration(labelText: context.loc.country),
                   validator: _validateCountry,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: _submit, child: const Text('Save profile')),
+                ElevatedButton(onPressed: _submit, child: Text(context.loc.save_profile)),
               ],
             ),
           ),

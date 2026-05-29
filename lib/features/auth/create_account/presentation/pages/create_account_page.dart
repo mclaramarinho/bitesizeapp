@@ -5,6 +5,7 @@ import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
 import 'package:adhd_app/shared/di/injection.dart';
+import 'package:adhd_app/shared/utils/extensions/context.dart';
 import 'package:adhd_app/shared/utils/validators/input_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,18 +78,18 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
         // Google sign up
         DsButton.loadable(
           onPressed: _simulateSignUpWithGoogle,
-          label: 'Continue with Google',
-          loadingLabel: 'Signing in...',
+          label: context.loc.continue_with_google,
+          loadingLabel: context.loc.signing_in,
           prefixIcon: Icons.login,
         ),
 
         const SizedBox(height: DsSpacing.md),
         Row(
-          children: const [
+          children: [
             Expanded(child: Divider()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: DsSpacing.sm),
-              child: Text('OR'),
+              child: Text(context.loc.or),
             ),
             Expanded(child: Divider()),
           ],
@@ -102,21 +103,21 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               DsTextInput(
-                label: 'Email',
-                hint: 'you@domain.com',
+                label: context.loc.email,
+                hint: context.loc.email_hint,
                 validator: InputValidation.validateEmail,
               ),
               const SizedBox(height: DsSpacing.md),
               DsTextInput(
-                label: 'Password',
-                hint: 'Enter your password',
+                label: context.loc.password,
+                hint: context.loc.enter_ur_password,
                 validator: InputValidation.validatePassword,
                 isObscurable: true,
               ),
               const SizedBox(height: DsSpacing.md),
               DsTextInput(
-                label: 'Confirm Password',
-                hint: 'Re-enter your password',
+                label: context.loc.confirm_password,
+                hint: context.loc.reenter_ur_password,
                 isObscurable: true,
                 validator:
                     (v, valueToCompare) =>
@@ -124,13 +125,15 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
               ),
               const SizedBox(height: DsSpacing.lg),
               DsButton.loadable(
-                label: 'Create account',
+                label: context.loc.create_your_account,
                 loadingLabel: "",
                 onPressed: _createWithEmail,
               ),
             ],
           ),
         ),
+
+        // TODO - move second step form here and show conditionally based on cubit state
       ],
     );
   }
