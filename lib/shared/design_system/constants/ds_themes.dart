@@ -1,3 +1,6 @@
+import 'package:adhd_app/shared/design_system/constants/ds_colors.dart';
+import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
+import 'package:adhd_app/shared/design_system/constants/ds_typography.dart';
 import 'package:adhd_app/shared/utils/navigation/global.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +10,7 @@ import 'package:flutter/material.dart';
 class DsThemes {
   static ThemeData get current => Theme.of(NavigationService.context!);
   static TextTheme get currentTextTheme => current.textTheme;
+
 
   /// Dynamic evaluator to handle dark/light mode detection safely.
   /// If context is not ready yet, it safely defaults to dark mode to prevent light flashes.
@@ -24,84 +28,84 @@ class DsThemes {
   // ------------------------------------------
   
   static ThemeData get freeDark {
-    const cardColor = Color(0xFF181E26);
-    const primaryColor = Color(0xFF00FF87); // Dopamine Mint Green
+    final cardColor = DsColors.blue.veryDark;
+    final primaryColor = DsColors.green.dopamineMint; // Dopamine Mint Green
     
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: const Color(0xFF0F1319), // Deep slate obsidian
-      fontFamily: "Roboto",
-      textTheme: textThemes,
-      colorScheme: const ColorScheme.dark(
+      scaffoldBackgroundColor: DsColors.blue.deepSlateObsidian, // Deep slate obsidian
+      fontFamily: DsTypography.common.fontFamily,
+      textTheme: DsTypography.common.theme,
+      colorScheme: ColorScheme.dark(
         primary: primaryColor,
-        secondary: Color(0xFF60EFFF),     // Light Cyber Blue
+        secondary: DsColors.blue.lightCyber, // Light Cyber Blue
         surface: cardColor,               // Container Cards
-        error: Color(0xFFFF4B4B),         // Deadline Alerts
-        onPrimary: Color(0xFF00381A),
-        onSurface: Color(0xFFE2E8F0),     // High-visibility Text
-        onSurfaceVariant: Color(0xFF94A3B8), // Soft details
+        error: DsColors.red.deadline, // Deadline Alerts
+        onPrimary: DsColors.green.veryDark,
+        onSurface: DsColors.white.white2, // High-visibility Text
+        onSurfaceVariant: DsColors.blue.softDetails,  // Soft details
       ),
-      cardTheme: const CardTheme(
+      cardTheme: CardThemeData(
         color: cardColor,
         margin: EdgeInsets.zero,
-        elevation: 0,
+        elevation: DsSpacing.none,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(DsSpacing.md)),
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Color(0xFFE2E8F0),
+        elevation: DsSpacing.none,
+        foregroundColor: DsColors.white.white2,
         centerTitle: false,
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) => 
-          states.contains(WidgetState.selected) ? primaryColor : Colors.transparent),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+          states.contains(WidgetState.selected) ? primaryColor : DsColors.transparent),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(DsSpacing.xs))),
       ),
     );
   }
 
   static ThemeData get freeLight {
-    const cardColor = Color(0xFFFFFFFF);
-    const primaryColor = Color(0xFF007A4F); // Muted Mint Green
+    final cardColor = DsColors.white.white;
+    final primaryColor = DsColors.green.mutedMint; // Muted Mint Green
     
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      scaffoldBackgroundColor: const Color(0xFFF7FAFC), // Very light slate
-      fontFamily: "Roboto",
-      textTheme: textThemes,
-      colorScheme: const ColorScheme.light(
+      scaffoldBackgroundColor: DsColors.white.white3, // Very light slate
+      fontFamily: DsTypography.common.fontFamily,
+      textTheme: DsTypography.common.theme,
+      colorScheme: ColorScheme.light(
         primary: primaryColor,
-        secondary: Color(0xFF0288D1),     // Cyan accents
+        secondary: DsColors.blue.pure, // Cyan accents
         surface: cardColor,
-        error: Color(0xFFB00020),
+        error: DsColors.red.veryDark,
         onPrimary: cardColor,
-        onSurface: Color(0xFF0F172A),     // Primary text color
-        onSurfaceVariant: Color(0xFF6B7280),
+        onSurface: DsColors.blue.veryDark, // Primary text color
+        onSurfaceVariant: DsColors.black.gray,
       ),
-      cardTheme: const CardTheme(
+      cardTheme: CardThemeData(
         color: cardColor,
         margin: EdgeInsets.zero,
         elevation: 1,
-        shadowColor: Color(0x0A000000),
+        shadowColor: DsColors.black.transparency,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(DsSpacing.md)),
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Color(0xFF0F172A),
+        elevation: DsSpacing.none,
+        foregroundColor: DsColors.blue.veryDark2,
         centerTitle: false,
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) => 
-          states.contains(WidgetState.selected) ? primaryColor : Colors.transparent),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+          states.contains(WidgetState.selected) ? primaryColor : DsColors.transparent),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(DsSpacing.xs))),
       ),
     );
   }
@@ -111,36 +115,36 @@ class DsThemes {
   // Gamified RPG styling for hyper-focus engagement
   // ------------------------------------------
   static ThemeData get premiumRetroRPG {
-    const cardColor = Color(0xFF221538); // Window Background
-    const primaryColor = Color(0xFFFFB800); // Quest Gold
+    final cardColor = DsColors.purple.veryDark; // Window Background
+    final primaryColor = DsColors.yellow.gold; // Quest Gold
     
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: const Color(0xFF120C1F), // Dark Arcade Purple
-      fontFamily: "Roboto",
-      textTheme: textThemes,
-      colorScheme: const ColorScheme.dark(
+      scaffoldBackgroundColor: DsColors.purple.veryDark2, // Dark Arcade Purple
+      fontFamily: DsTypography.common.fontFamily,
+      textTheme: DsTypography.common.theme,
+      colorScheme: ColorScheme.dark(
         primary: primaryColor,
-        secondary: Color(0xFFE040FB),     // Neon Elixir Magenta
+        secondary: DsColors.purple.elixirMagenta,     // Neon Elixir Magenta 
         surface: cardColor,
-        error: Color(0xFFFF0055),         // Critical Threat Warning
-        onPrimary: Color(0xFF3D2B00),
-        onSurface: Color(0xFFFFFFFF),
-        onSurfaceVariant: Color(0xFFA594C4),
+        error: DsColors.red.critical,         // Critical Threat Warning
+        onPrimary: DsColors.yellow.veryDark,
+        onSurface: DsColors.white.white,
+        onSurfaceVariant: DsColors.purple.light,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: cardColor,
         margin: EdgeInsets.zero,
-        elevation: 0,
+        elevation: DsSpacing.none,
         shape: RoundedRectangleBorder(
           side: BorderSide(color: primaryColor.withOpacity(0.5), width: 1.5),
-          borderRadius: const BorderRadius.all(Radius.circular(8)), // Sharper retro corners
+          borderRadius: const BorderRadius.all(Radius.circular(DsSpacing.sm)), // Sharper retro corners
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: DsSpacing.none,
         foregroundColor: primaryColor,
         centerTitle: true,
       ),
@@ -157,75 +161,43 @@ class DsThemes {
   // Intense hyperfixation visual engine
   // ------------------------------------------
   static ThemeData get premiumCyberpunk {
-    const cardColor = Color(0xFF0D0D0D); // Shell blocks
-    const primaryColor = Color(0xFFFF007F); // Laser Neon Pink
+    final cardColor = DsColors.black.black2; // Shell blocks
+    final primaryColor = DsColors.pink.laserNeon; // Laser Neon Pink
     
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: const Color(0xFF000000), // Raw Terminal Black
-      fontFamily: "Roboto",
-      textTheme: textThemes,
-      colorScheme: const ColorScheme.dark(
+      scaffoldBackgroundColor: DsColors.black.black, // Raw Terminal Black
+      fontFamily: DsTypography.common.fontFamily,
+      textTheme: DsTypography.common.theme,
+      colorScheme: ColorScheme.dark(
         primary: primaryColor,
-        secondary: Color(0xFF39FF14),     // Matrix Toxic Green
+        secondary: DsColors.green.toxic,     // Matrix Toxic Green
         surface: cardColor,
-        error: Color(0xFFE53935),
-        onPrimary: const Color(0xFF000000),
-        onSurface: Color(0xFF00FFFF),     // Cyan Digital Text
-        onSurfaceVariant: Color(0xFF008B8B),
+        error: DsColors.red.red,
+        onPrimary: DsColors.black.black, 
+        onSurface: DsColors.blue.cyanDigital,     // Cyan Digital Text
+        onSurfaceVariant: DsColors.blue.blueSea, // Subtle blue details
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: cardColor,
         margin: EdgeInsets.zero,
-        elevation: 0,
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(color: primaryColor, width: 1),
-          borderRadius: BorderRadius.all(Radius.circular(4)),
+        elevation: DsSpacing.none,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: primaryColor, width: DsSpacing.xxxs),
+          borderRadius: BorderRadius.all(Radius.circular(DsSpacing.xs)),
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Color(0xFF00FFFF),
+        elevation: DsSpacing.none,
+        foregroundColor: DsColors.blue.cyanDigital,
         centerTitle: false,
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) => 
           states.contains(WidgetState.selected) ? primaryColor : Colors.transparent),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2))),
-      ),
-    );
-  }
-
-  // ------------------------------------------
-  // DEFAULT TEXT THEMES
-  // ------------------------------------------
-  static TextTheme get textThemes {
-    return const TextTheme(
-      headlineLarge: TextStyle(
-        fontSize: 26,
-        fontWeight: FontWeight.w800,
-        letterSpacing: -0.5,
-      ),
-      headlineMedium: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w700,
-        letterSpacing: -0.2,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 16, 
-        fontWeight: FontWeight.w600,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        height: 1.4,
-      ),
-      bodySmall: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 1.0,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(DsSpacing.xxs))),
       ),
     );
   }

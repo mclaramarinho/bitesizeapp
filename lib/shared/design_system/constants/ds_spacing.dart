@@ -4,6 +4,8 @@
 class DsSpacing {
   /// 0px
   static const double none = 0;
+  /// 1px
+  static const double xxxs = 1.0;
   /// 2px
   static const double xxs = 2.0;
   /// 4px
@@ -19,7 +21,6 @@ class DsSpacing {
   /// 32px
   static const double xxl = 32.0;
 
-  /// 8px
   static const double radiusSm = 8.0;
   /// 16px
   static const double radiusMd = 16.0;
