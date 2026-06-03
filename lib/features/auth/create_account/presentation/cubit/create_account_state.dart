@@ -1,5 +1,4 @@
 import 'package:adhd_app/features/auth/create_account/domain/entities/create_account_form_entity.dart';
-import 'package:adhd_app/features/auth/create_account/domain/entities/create_account_form_steps_enum.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class CreateAccountState extends Equatable {}
@@ -13,37 +12,55 @@ class CreateAccountStateLoaded extends CreateAccountState {
   final CreateAccountFormEntity form;
   final bool willSigninWithGoogle;
   final bool isSaveLoading;
-  final CreateAccountSteps currentStep;
   final bool saveSuccessful;
   final bool isSigninWithGoogleOpen;
+  final String? formErrorMessage;
+  final bool showFormErrorMessage;
 
   CreateAccountStateLoaded({
     this.form = const CreateAccountFormEntity(),
     this.willSigninWithGoogle = false,
     this.isSaveLoading = false,
-    this.currentStep = CreateAccountSteps.stepOne,
     this.saveSuccessful = false,
     this.isSigninWithGoogleOpen = false,
+    this.formErrorMessage,
+    this.showFormErrorMessage = false,
   });
 
   CreateAccountStateLoaded copyWith({
     CreateAccountFormEntity? form,
     bool? willSigninWithGoogle,
     bool? isSaveLoading,
-    CreateAccountSteps? currentStep,
     bool? saveSuccessful,
     bool? isSigninWithGoogleOpen,
+    String? formErrorMessage,
+    bool? showFormErrorMessage,
   }) {
     return CreateAccountStateLoaded(
       form: form ?? this.form,
       willSigninWithGoogle: willSigninWithGoogle ?? this.willSigninWithGoogle,
       isSaveLoading: isSaveLoading ?? this.isSaveLoading,
-      currentStep: currentStep ?? this.currentStep,
       saveSuccessful: saveSuccessful ?? this.saveSuccessful,
-      isSigninWithGoogleOpen: isSigninWithGoogleOpen ?? this.isSigninWithGoogleOpen,
+      isSigninWithGoogleOpen:
+          isSigninWithGoogleOpen ?? this.isSigninWithGoogleOpen,
+      formErrorMessage: formErrorMessage ?? this.formErrorMessage,
+      showFormErrorMessage: showFormErrorMessage ?? this.showFormErrorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [form, willSigninWithGoogle, isSaveLoading, currentStep, saveSuccessful, isSigninWithGoogleOpen];
+  List<Object?> get props => [
+    form,
+    willSigninWithGoogle,
+    isSaveLoading,
+    saveSuccessful,
+    isSigninWithGoogleOpen,
+    formErrorMessage,
+    showFormErrorMessage,
+  ];
+}
+
+class CreateAccountStateSuccess extends CreateAccountState {
+  @override
+  List<Object?> get props => [];
 }

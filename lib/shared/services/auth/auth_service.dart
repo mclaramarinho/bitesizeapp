@@ -1,0 +1,10 @@
+import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
+import 'package:adhd_app/shared/utils/result/result.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+abstract class AuthService {
+  Future<Result<UserCredential, AuthException>> createAccountWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+}

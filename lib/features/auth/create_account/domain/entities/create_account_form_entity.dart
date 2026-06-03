@@ -7,6 +7,7 @@ class CreateAccountFormEntity extends Equatable {
   final String? name;
   final DateTime? birthdate;
   final String? country;
+  final String? firebaseUserUid;
 
   const CreateAccountFormEntity({
     this.email,
@@ -15,6 +16,7 @@ class CreateAccountFormEntity extends Equatable {
     this.name,
     this.birthdate,
     this.country,
+    this.firebaseUserUid,
   });
 
   CreateAccountFormEntity copyWith({
@@ -24,6 +26,7 @@ class CreateAccountFormEntity extends Equatable {
     String? name,
     DateTime? birthdate,
     String? country,
+    String? firebaseUserUid,
   }) {
     return CreateAccountFormEntity(
       email: email ?? this.email,
@@ -32,9 +35,18 @@ class CreateAccountFormEntity extends Equatable {
       name: name ?? this.name,
       birthdate: birthdate ?? this.birthdate,
       country: country ?? this.country,
+      firebaseUserUid: firebaseUserUid ?? this.firebaseUserUid,
     );
   }
 
   @override
-  List<Object?> get props => [email, password, confirmPassword, name, birthdate, country];
+  List<Object?> get props => [
+    email,
+    password,
+    confirmPassword,
+    name,
+    birthdate,
+    country,
+    firebaseUserUid,
+  ];
 }

@@ -9,6 +9,8 @@ import 'package:adhd_app/shared/design_system/widgets/ds_divider/ds_divider.dart
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/extensions/context.dart';
+import 'package:adhd_app/shared/utils/navigation/router.dart';
+import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,12 +38,10 @@ class _CreateAccountPageContent extends StatefulWidget {
 
 class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
   bool _loadingGoogle = false;
-  late CreateAccountCubit _cubit;
 
   @override
   void initState() {
     super.initState();
-    _cubit = context.read<CreateAccountCubit>();
   }
 
   @override
@@ -64,7 +64,11 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
   Widget build(BuildContext context) {
     final loc = context.loc;
     return BlocConsumer<CreateAccountCubit, CreateAccountState>(
-      listener: (ctx, state) => {},
+      listener: (ctx, state) => {
+        if(state is CreateAccountStateSuccess) {
+          getIt.get<AppRouter>().replace(AppRoutes.signIn)
+        }
+      },
       builder: (ctx, state) {
         return DsScaffold(
           children: [
@@ -85,16 +89,13 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
             const SizedBox(height: DsSpacing.md),
             DsDivider.withText(context, loc.or),
             const SizedBox(height: DsSpacing.md),
-
-            if (state is CreateAccountStateLoaded &&
-                state.currentStep == CreateAccountSteps.stepOne) ...[
-              CreateAccountWithEmailPasswordForm(),
+            if(state is CreateAccountStateLoaded &&
+                state.showFormErrorMessage
+                && state.formErrorMessage != null) ...[
+              Text(state.formErrorMessage!),
             ],
 
-            if (state is CreateAccountStateLoaded &&
-                state.currentStep == CreateAccountSteps.stepTwo) ...[
-              // TODO - move second step form here and show conditionally based on cubit state
-            ],
+            CreateAccountWithEmailPasswordForm(),
 
             SizedBox(height: DsSpacing.md),
 
