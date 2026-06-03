@@ -2,6 +2,7 @@ import 'package:adhd_app/features/auth/create_account/presentation/pages/create_
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/navigation/global.dart';
+import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en'),
       ],
+      routerConfig: getIt.get<AppRouter>().router
     );
   }
 }

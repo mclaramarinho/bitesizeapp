@@ -11,7 +11,7 @@ class AppRouter {
     navigatorKey: NavigationService.navigatorKey,
   );
 
-  static GoRouter get router => _router;
+  GoRouter get router => _router;
 
   void push(AppRoutes route) async {
     _router.go(route.path);
