@@ -1,5 +1,5 @@
 class InputValidation {
-  static String? validateEmail(String? v, String? valueToCompare) {
+  static String? validateEmail(String? v) {
     if (v == null || v.trim().isEmpty) return 'Please enter your email';
 
     final email = v.trim();
@@ -9,7 +9,7 @@ class InputValidation {
     return null;
   }
 
-  static String? validatePassword(String? v, String? valueToCompare) {
+  static String? validatePassword(String? v) {
     if (v == null || v.isEmpty) return 'Enter a password';
     if (v.length < 6) return 'Password must be at least 6 characters';
     return null;

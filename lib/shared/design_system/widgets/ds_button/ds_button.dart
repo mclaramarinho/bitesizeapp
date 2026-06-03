@@ -1,5 +1,6 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
+import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -17,6 +18,33 @@ class DsButton {
       prefixIcon: prefixIcon,
     );
   }
+
+  static Widget link({required VoidCallback onPressed, required String label}) {
+    return TextButton(onPressed: onPressed, child: Text(label));
+  }
+
+  static Widget textAndLink({
+    required VoidCallback onPressed,
+    required String label,
+    required String linkLabel,
+  }) {
+    return Center(
+      child: RichText(
+        text: TextSpan(
+          text: label,
+          children: [
+            TextSpan(
+              text: linkLabel,
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+              ),
+            ).onTap(onPressed),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 // =======================================================================================
@@ -29,7 +57,6 @@ class _DSLoadableButton extends StatefulWidget {
   final IconData? prefixIcon;
 
   const _DSLoadableButton({
-    super.key,
     required this.onPressed,
     required this.label,
     required this.loadingLabel,

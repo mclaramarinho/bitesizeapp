@@ -7,16 +7,16 @@ class DsTextInput extends StatefulWidget {
     required this.label,
     required this.hint,
     this.validator,
-    this.valueToCompareOnValidation,
     this.isObscurable = false,
+    this.onChanged,
     super.key,
   });
 
-  final String? Function(String?, String?)? validator;
-  final String? valueToCompareOnValidation;
+  final String? Function(String?)? validator;
   final String label;
   final String hint;
   final bool? isObscurable;
+  final void Function(String)? onChanged;
 
   @override
   State<DsTextInput> createState() => _DsTextInputState();
@@ -34,7 +34,7 @@ class _DsTextInputState extends State<DsTextInput> {
 
   String? handleValidation(String? v) {
     if (widget.validator != null) {
-      return widget.validator!(v, widget.valueToCompareOnValidation);
+      return widget.validator!(v);
     }
     return null;
   }
@@ -44,6 +44,7 @@ class _DsTextInputState extends State<DsTextInput> {
     return TextFormField(
       controller: _textController,
       keyboardType: TextInputType.emailAddress,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hint,

@@ -12,10 +12,12 @@ class CreateAccountWithEmailPasswordForm extends StatefulWidget {
   const CreateAccountWithEmailPasswordForm({super.key});
 
   @override
-  State<CreateAccountWithEmailPasswordForm> createState() => _CreateAccountWithEmailPasswordFormState();
+  State<CreateAccountWithEmailPasswordForm> createState() =>
+      _CreateAccountWithEmailPasswordFormState();
 }
 
-class _CreateAccountWithEmailPasswordFormState extends State<CreateAccountWithEmailPasswordForm> {
+class _CreateAccountWithEmailPasswordFormState
+    extends State<CreateAccountWithEmailPasswordForm> {
   final _formKey = GlobalKey<FormState>();
   late CreateAccountCubit _cubit;
 
@@ -25,16 +27,19 @@ class _CreateAccountWithEmailPasswordFormState extends State<CreateAccountWithEm
     _cubit = context.read<CreateAccountCubit>();
   }
 
-   Future<void> _createWithEmail() async {
+  Future<void> _createWithEmail() async {
     if (!_formKey.currentState!.validate()) return;
-    // setState(() => _loadingEmail = true);
-    // TODO: call your auth service here. This simulates network latency.
+    _cubit.createWithEmailAndPassword();
     await Future.delayed(const Duration(seconds: 1));
     // setState(() => _loadingEmail = false);
     if (!mounted) return;
-    // Navigator.of(context).push(MaterialPageRoute(
-    //   builder: (_) => CompleteProfilePage(email: _emailController.text.trim()),
-    // ));
+  }
+
+  String? confirmPasswordValidator(String? v, CreateAccountState state) {
+    return InputValidation.validateConfirm(
+      v,
+      state is CreateAccountStateLoaded ? state.form.password : null,
+    );
   }
 
   @override
@@ -52,6 +57,7 @@ class _CreateAccountWithEmailPasswordFormState extends State<CreateAccountWithEm
                 label: loc.email,
                 hint: loc.email_hint,
                 validator: InputValidation.validateEmail,
+                onChanged: (value) => _cubit.setEmail(value),
               ),
               const SizedBox(height: DsSpacing.md),
               DsTextInput(
@@ -59,15 +65,15 @@ class _CreateAccountWithEmailPasswordFormState extends State<CreateAccountWithEm
                 hint: loc.enter_ur_password,
                 validator: InputValidation.validatePassword,
                 isObscurable: true,
+                onChanged: (value) => _cubit.setPassword(value),
               ),
               const SizedBox(height: DsSpacing.md),
               DsTextInput(
                 label: loc.confirm_password,
                 hint: loc.reenter_ur_password,
                 isObscurable: true,
-                validator:
-                    (v, valueToCompare) =>
-                        InputValidation.validateConfirm(v, valueToCompare),
+                onChanged: (value) => _cubit.setConfirmPassword(value),
+                validator: (v) => confirmPasswordValidator(v, state),
               ),
               const SizedBox(height: DsSpacing.lg),
               DsButton.loadable(
@@ -78,8 +84,7 @@ class _CreateAccountWithEmailPasswordFormState extends State<CreateAccountWithEm
             ],
           ),
         );
-
-      }, 
+      },
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 extension ExtWidget on Widget {
@@ -5,6 +6,17 @@ extension ExtWidget on Widget {
     return GestureDetector(
       onTap: callback,
       child: this,
+    );
+  }
+}
+
+extension ExtTextSpan on TextSpan {
+  TextSpan onTap(GestureTapCallback callback) {
+    return TextSpan(
+      text: text,
+      style: style,
+      children: children,
+      recognizer: TapGestureRecognizer()..onTap = callback,
     );
   }
 }

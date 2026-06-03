@@ -14,6 +14,7 @@ class DsThemes {
 
   /// Dynamic evaluator to handle dark/light mode detection safely.
   /// If context is not ready yet, it safely defaults to dark mode to prevent light flashes.
+  // TODO - still does not look good
   static ThemeData get freeDefault {
     final context = NavigationService.context;
     if (context == null) return freeDark;

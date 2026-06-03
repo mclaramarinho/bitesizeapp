@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: DsThemes.freeDefault,
+      theme: DsThemes.freeDark,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en'),
       ],
-      routerConfig: getIt.get<AppRouter>().router
+      routerConfig: getIt.get<AppRouter>().router,
     );
   }
 }

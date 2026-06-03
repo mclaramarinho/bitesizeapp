@@ -17,6 +17,18 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
   }
 
+  void setEmail(String? email) {
+    _emitLoadedStateSafelly((cs) => emit(cs.copyWith(form: cs.form.copyWith(email: email))));
+  }
+
+  void setPassword(String? password) {
+    _emitLoadedStateSafelly((cs) => emit(cs.copyWith(form: cs.form.copyWith(password: password))));
+  }
+
+  void setConfirmPassword(String? confirmPassword) {
+    _emitLoadedStateSafelly((cs) => emit(cs.copyWith(form: cs.form.copyWith(confirmPassword: confirmPassword))));
+  }
+
 
   // ========================================================================
   // NAVIGATION

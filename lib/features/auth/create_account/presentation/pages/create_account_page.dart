@@ -7,11 +7,8 @@ import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_divider/ds_divider.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
-import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/extensions/context.dart';
-import 'package:adhd_app/shared/utils/l10n/app_localizations.dart';
-import 'package:adhd_app/shared/utils/validators/input_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -98,6 +95,16 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
                 state.currentStep == CreateAccountSteps.stepTwo) ...[
               // TODO - move second step form here and show conditionally based on cubit state
             ],
+
+            SizedBox(height: DsSpacing.md),
+
+            // TODO - add link to sign in page
+            // TODO - localization
+            DsButton.textAndLink(
+              onPressed: () => debugPrint("Already have an account"),
+              label: "Already have an account? ",
+              linkLabel: "Sign in.",
+            ),
           ],
         );
       },
