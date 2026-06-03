@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
-  await getIt.get<EnvService>().load();
-
+  /// DI
   configureDependencies();
 
+  /// Load env variables
+  await getIt.get<EnvService>().load();
+
+  /// Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseInitializer.init();
   
