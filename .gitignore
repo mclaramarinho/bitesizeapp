@@ -52,4 +52,4 @@ lib/shared/di/injection.config.dart
 .env
 google-services.json
 firebase.json
-pubspeck.lock
+pubspec.lock
