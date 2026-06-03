@@ -6,6 +6,4 @@ template-arb-file: app_en.arb
 
 output-class: AppLocalizations
 
-synthetic-package: false
-
 output-localization-file: app_localizations.dart

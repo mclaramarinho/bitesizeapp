@@ -47,6 +47,9 @@ app.*.map.json
 # generated during build
 /lib/shared/utils/l10n/
 lib/shared/di/injection.config.dart
+/lib/shared/firebase/firebase_options.dart
 
 .env
 google-services.json
+firebase.json
+pubspeck.lock

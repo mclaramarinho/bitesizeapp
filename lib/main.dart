@@ -1,14 +1,20 @@
-import 'package:adhd_app/features/auth/create_account/presentation/pages/create_account_page.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/utils/navigation/global.dart';
+import 'package:adhd_app/shared/firebase/firebase_initializer.dart' as FirebaseInitializer;
+import 'package:adhd_app/shared/services/env/env_service.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+Future<void> main() async {
+  await getIt.get<EnvService>().load();
+
   configureDependencies();
-  runApp(const MyApp());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseInitializer.init();
+  
+  runApp(const MyApp());  
 }
 
 class MyApp extends StatelessWidget {
