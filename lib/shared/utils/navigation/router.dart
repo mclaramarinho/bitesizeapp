@@ -3,8 +3,11 @@ import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@injectable
 class AppRouter {
+  factory AppRouter() => const AppRouter._internal();
+  const AppRouter._internal();
+
   static final GoRouter _router = GoRouter(
     routes: AppRoutes.allPublicRoutes, // TODO - Add private routes and conditional
     initialLocation: AppRoutes.login.path, // TODO - Add private routes and conditional
