@@ -1,7 +1,11 @@
+import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
 import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
+import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
+import 'package:adhd_app/shared/utils/l10n/app_localizations.dart';
 import 'package:adhd_app/shared/utils/logger/logger.dart';
+import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +21,8 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
   final AuthService _authService;
 
   final Logger _logger = Logger(location: "CreateAccountCubit");
+
+  final AppLocalizations loc = getIt.get<AppRouter>().context.loc;
 
   void load() {
     emit(CreateAccountStateLoaded());
@@ -55,12 +61,11 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
             ),
           ),
         );
-        // TODO - sign user in 
         emit(CreateAccountStateSuccess());
       },
       error: (error) {
         // Handle the error, you can emit an error state with the error message or show a snackbar
-        _logger.error('Error creating account: $error');
+        _logger.error('${loc.error_creating_account}: $error');
         _emitFormErrorMessage(error.message);
       },
     );
@@ -129,7 +134,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     if (form.email.isNullOrEmpty() ||
         form.password.isNullOrEmpty() ||
         form.confirmPassword.isNullOrEmpty()) {
-      _emitFormErrorMessage('Please fill in all fields');
+      _emitFormErrorMessage(loc.please_fill_in_all_fields);
       return null;
     }
 
@@ -140,7 +145,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     ];
 
     if (password != confirmPassword) {
-      _emitFormErrorMessage('Passwords do not match');
+      _emitFormErrorMessage(loc.passwords_dont_match);
       return null;
     }
     return [email, password];

@@ -1,4 +1,3 @@
-import 'package:adhd_app/features/auth/create_account/presentation/pages/complete_profile_page.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/pages/create_account_page.dart';
 import 'package:adhd_app/features/auth/sign_in/presentation/pages/sign_in_page.dart';
 import 'package:adhd_app/features/home/presentation/pages/home_page.dart';
@@ -13,11 +12,6 @@ enum AppRoutes {
     private: false,
   ),
   signIn(path: "/sign-in", builder: _loginBuilder, private: false),
-  completeProfile(
-    path: "/complete-profile",
-    builder: _completeProfileBuilder,
-    private: true,
-  ),
   home(
     path: "/",
     builder: _homeBuilder,
@@ -68,10 +62,6 @@ Widget _loginBuilder(BuildContext context, GoRouterState state) {
 
 Widget _createAccountBuilder(BuildContext context, GoRouterState state) {
   return const CreateAccountPage();
-}
-
-Widget _completeProfileBuilder(BuildContext context, GoRouterState state) {
-  return const CompleteProfilePage();
 }
 
 Widget _homeBuilder(BuildContext context, GoRouterState state) {

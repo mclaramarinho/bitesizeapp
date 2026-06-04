@@ -2,12 +2,11 @@ import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_cubit.
 import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_state.dart';
 import 'package:adhd_app/features/auth/widgets/auth_page_header.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
-import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/utils/extensions/context.dart';
+import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:adhd_app/shared/utils/validators/input_validation.dart';
@@ -75,18 +74,17 @@ class _SignInPageContentState extends State<_SignInPageContent> {
                   ),
                   const SizedBox(height: DsSpacing.lg),
                   DsButton.loadable(
-                    label: "Sign In",
+                    label: loc.sign_in,
                     loadingLabel: "",
                     onPressed: () {},
                   ),
                 ],
               ),
             ),
-            // TODO - localization
             DsButton.textAndLink(
               onPressed: () => _router.push(AppRoutes.createAccount),
-              label: "Don't have an account? ",
-              linkLabel: "Create now!",
+              label: "${loc.dont_have_an_account} ",
+              linkLabel: loc.create_now,
             ),
           ],
         );

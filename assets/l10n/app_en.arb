@@ -1,15 +1,12 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  },
-  "@@_SECTION_LOGIN": "-----------------------------------------",
+  "@@locale": "en",
+
   "continue_with_google": "Continue with Google",
   "signing_in": "Signing in...",
   "create_your_account": "Create your account",
   "profile_complete": "Profile complete",
+  "sign_in": "Sign In",
 
-  "@@_SECTION_PROFILE": "-----------------------------------------",
   "profile": "Profile",
   "enter_name": "Enter your name",
   "select_birthdate": "Select your birthdate",
@@ -19,19 +16,26 @@
   "signed_up_as": "Signed up as",
 
 
-  "@@_SECTION_AUTH": "-----------------------------------------",
   "email": "Email",
   "email_hint": "you@domain.com",
   "password": "Password",
   "enter_ur_password": "Enter your password",
   "confirm_password": "Confirm Password",
   "reenter_ur_password": "Re-enter your password",
+  "already_have_an_account": "Already have an account?",
+  "dont_have_an_account": "Don't have an account?",
+  "create_now": "Create Now!",
+  "auth_header_subtitle": "Start building your future step by step",
+  "error_creating_account": "Error creating account",
 
-  "@@_SECTION_MISC": "-----------------------------------------",
   "or": "OR",
   "done": "Done",
   "full_name": "Full name",
   "birthdate": "Birthdate",
   "tap_to_select": "Tap to select",
-  "country": "Country"
+  "country": "Country",
+  "saving": "Saving",
+  "app_name": "Bite Size",
+  "please_fill_in_all_fields": "Please fill in all fields",
+  "passwords_dont_match": "Passwords do not match"
 }

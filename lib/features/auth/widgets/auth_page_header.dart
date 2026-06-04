@@ -1,11 +1,10 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/utils/extensions/context.dart';
+import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 enum AuthPageHeaderType {
   signIn,
@@ -27,7 +26,7 @@ class AuthPageHeader extends StatelessWidget {
         pageTitle = loc.create_your_account.toUpperCase();
         break;
       case AppRoutes.signIn:
-        pageTitle = "Sign In".toUpperCase();
+        pageTitle = loc.sign_in.toUpperCase();
         break;
       default:
     }
@@ -35,12 +34,12 @@ class AuthPageHeader extends StatelessWidget {
     return Column(
       children: [
         Text(
-          pageTitle ?? "Bite Size",
+          pageTitle ?? loc.app_name,
           style: DsThemes.current.textTheme.headlineLarge,
         ),
         SizedBox(height: DsSpacing.sm),
         Text(
-          'Start building your future step by step',
+          loc.auth_header_subtitle,
           style: DsThemes.current.textTheme.headlineMedium,
         ),
       ],

@@ -1,5 +1,5 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
-import 'package:adhd_app/shared/utils/extensions/context.dart';
+import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:flutter/material.dart';
 
 class DsDivider {

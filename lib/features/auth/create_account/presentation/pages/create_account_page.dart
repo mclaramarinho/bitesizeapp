@@ -7,13 +7,11 @@ import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_divider/ds_divider.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/utils/extensions/context.dart';
+import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'complete_profile_page.dart';
 
 class CreateAccountPage extends StatelessWidget {
   const CreateAccountPage({super.key});
@@ -56,9 +54,6 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
     await Future.delayed(const Duration(seconds: 1));
     setState(() => _loadingGoogle = false);
     if (!mounted) return;
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => CompleteProfilePage(email: null)));
   }
 
   @override
@@ -100,11 +95,10 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
 
             SizedBox(height: DsSpacing.md),
 
-            // TODO - localization
             DsButton.textAndLink(
               onPressed: () => _router.replace(AppRoutes.signIn),
-              label: "Already have an account? ",
-              linkLabel: "Sign in.",
+              label: "${loc.already_have_an_account} ",
+              linkLabel: "${loc.sign_in}.",
             ),
           ],
         );
