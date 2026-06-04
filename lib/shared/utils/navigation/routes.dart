@@ -1,8 +1,7 @@
 import 'package:adhd_app/features/auth/create_account/presentation/pages/complete_profile_page.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/pages/create_account_page.dart';
 import 'package:adhd_app/features/auth/sign_in/presentation/pages/sign_in_page.dart';
-import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/features/home/presentation/pages/home_page.dart';
 import 'package:adhd_app/shared/utils/exceptions/navigation/navigation_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +16,11 @@ enum AppRoutes {
   completeProfile(
     path: "/complete-profile",
     builder: _completeProfileBuilder,
+    private: true,
+  ),
+  home(
+    path: "/",
+    builder: _homeBuilder,
     private: true,
   );
 
@@ -40,14 +44,6 @@ enum AppRoutes {
     return GoRoute(
       path: path,
       builder: builder,
-      redirect: (context, state) {
-        if (!private) return null;
-        final authService = getIt.get<AuthService>();
-        if (authService.currentUser == null) {
-          return AppRoutes.signIn.path;
-        }
-        return null;
-      },
     );
   }
 
@@ -76,4 +72,8 @@ Widget _createAccountBuilder(BuildContext context, GoRouterState state) {
 
 Widget _completeProfileBuilder(BuildContext context, GoRouterState state) {
   return const CompleteProfilePage();
+}
+
+Widget _homeBuilder(BuildContext context, GoRouterState state) {
+  return const HomePage();
 }

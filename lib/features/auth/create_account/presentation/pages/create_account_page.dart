@@ -67,7 +67,7 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
     return BlocConsumer<CreateAccountCubit, CreateAccountState>(
       listener: (ctx, state) => {
         if(state is CreateAccountStateSuccess) {
-          _router.replace(AppRoutes.signIn)
+          _router.replace(AppRoutes.home)
         }
       },
       builder: (ctx, state) {

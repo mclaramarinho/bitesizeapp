@@ -11,10 +11,8 @@ import 'package:injectable/injectable.dart';
 class AppRouter {
   static final GoRouter _router = GoRouter(
     refreshListenable: getIt.get<AuthService>().stateListenable,
-    routes:
-        AppRoutes.allPublicRoutes, // TODO - Add private routes and conditional
-    initialLocation:
-        AppRoutes.signIn.path, // TODO - Add private routes and conditional
+    routes: AppRoutes.allGoRoutes,
+    initialLocation: AppRoutes.home.path,
     navigatorKey: NavigationService.navigatorKey,
     redirect: _redirectHandler,
   );
@@ -45,15 +43,18 @@ class AppRouter {
   ) {
     final authService = getIt.get<AuthService>();
     final bool loggedIn = authService.currentUser != null;
-    final bool isLoggingIn = state.matchedLocation == AppRoutes.signIn.path;
+    final currentPath = state.matchedLocation;
+    final bool isLoggingIn = currentPath == AppRoutes.signIn.path;
+    final AppRoutes route = AppRoutes.fromPath(currentPath);
 
     if (!loggedIn) {
-      return isLoggingIn ? null : AppRoutes.signIn.path;
+      return isLoggingIn
+          ? null
+          : route.private
+          ? AppRoutes.signIn.path
+          : null;
     }
 
-    if (isLoggingIn) return AppRoutes.signIn.path;
-
-    // return AppRoutes.signIn.path;
     return null;
   }
 }
