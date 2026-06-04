@@ -1,5 +1,8 @@
 import 'package:adhd_app/features/auth/create_account/presentation/pages/complete_profile_page.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/pages/create_account_page.dart';
+import 'package:adhd_app/features/auth/sign_in/presentation/pages/sign_in_page.dart';
+import 'package:adhd_app/shared/di/injection.dart';
+import 'package:adhd_app/shared/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,7 +30,18 @@ enum AppRoutes {
   });
 
   GoRoute toGoRoute() {
-    return GoRoute(path: path, builder: builder);
+    return GoRoute(
+      path: path,
+      builder: builder,
+      redirect: (context, state) {
+        if(!private) return null;
+        final authService = getIt.get<AuthService>();
+        if(authService.currentUser == null) {
+          return AppRoutes.signIn.path;
+        }
+        return path;
+      },
+    );
   }
 
   static List<GoRoute> get allGoRoutes =>
@@ -46,7 +60,7 @@ enum AppRoutes {
 // BUILDERS
 // ========================================================================
 Widget _loginBuilder(BuildContext context, GoRouterState state) {
-  return const SizedBox.expand();
+  return const SignInPage();
 }
 
 Widget _createAccountBuilder(BuildContext context, GoRouterState state) {
