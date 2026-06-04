@@ -48,8 +48,10 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     createResult.when(
       ok: (userCredential) {
-        _logger.info('Account created successfully: ${userCredential.user?.email}');
-
+        _logger.info(
+          'Account created successfully: ${userCredential.user?.email}',
+        );
+        // TODO - create profile on the database
         _emitLoadedStateSafelly(
           (cs) => emit(
             cs.copyWith(

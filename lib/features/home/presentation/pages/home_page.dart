@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt.get<HomeCubit>(),
+      create: (_) => getIt.get<HomeCubit>()..load(),
       child: _HomePageContent(),
     );
   }
@@ -32,9 +32,11 @@ class _HomePageContentState extends State<_HomePageContent> {
       builder: (context, state) {
         return DsScaffold(
           children: [
-            Text(
-              "Home page for user: ",
-            ), // TODO - show user email just to make sure its working
+            if (state is HomeStateInitial) ...[CircularProgressIndicator()],
+
+            if (state is HomeStateLoaded) ...[
+              Text("Home page for user: ${state.user!.email}"),
+            ],
           ],
         );
       },
