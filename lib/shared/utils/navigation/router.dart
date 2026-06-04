@@ -14,7 +14,7 @@ class AppRouter {
     routes:
         AppRoutes.allPublicRoutes, // TODO - Add private routes and conditional
     initialLocation:
-        AppRoutes.createAccount.path, // TODO - Add private routes and conditional
+        AppRoutes.signIn.path, // TODO - Add private routes and conditional
     navigatorKey: NavigationService.navigatorKey,
     redirect: _redirectHandler,
   );
@@ -23,6 +23,9 @@ class AppRouter {
 
   BuildContext? get context =>
       _router.routerDelegate.navigatorKey.currentContext;
+
+  AppRoutes get matchedLocation =>
+      AppRoutes.fromPath(_router.state.matchedLocation);
 
   void push(AppRoutes route) async {
     _router.go(route.path);
@@ -50,6 +53,7 @@ class AppRouter {
 
     if (isLoggingIn) return AppRoutes.signIn.path;
 
-    return AppRoutes.signIn.path;
+    // return AppRoutes.signIn.path;
+    return null;
   }
 }

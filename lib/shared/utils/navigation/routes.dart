@@ -3,6 +3,7 @@ import 'package:adhd_app/features/auth/create_account/presentation/pages/create_
 import 'package:adhd_app/features/auth/sign_in/presentation/pages/sign_in_page.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/utils/exceptions/navigation/navigation_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,17 +30,23 @@ enum AppRoutes {
     this.private = true,
   });
 
+  static AppRoutes fromPath(String path) {
+    final route = AppRoutes.values.where((v) => v.path == path).firstOrNull;
+    if (route == null) throw RouteDoesNotExist();
+    return route;
+  }
+
   GoRoute toGoRoute() {
     return GoRoute(
       path: path,
       builder: builder,
       redirect: (context, state) {
-        if(!private) return null;
+        if (!private) return null;
         final authService = getIt.get<AuthService>();
-        if(authService.currentUser == null) {
+        if (authService.currentUser == null) {
           return AppRoutes.signIn.path;
         }
-        return path;
+        return null;
       },
     );
   }

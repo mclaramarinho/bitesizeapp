@@ -1,6 +1,6 @@
 import 'package:adhd_app/features/auth/create_account/presentation/cubit/create_account_cubit.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/cubit/create_account_state.dart';
-import 'package:adhd_app/features/auth/create_account/presentation/widgets/create_account_page_header.dart';
+import 'package:adhd_app/features/auth/widgets/auth_page_header.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/widgets/create_account_email_password_form.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
@@ -37,10 +37,12 @@ class _CreateAccountPageContent extends StatefulWidget {
 
 class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
   bool _loadingGoogle = false;
+  late AppRouter _router;
 
   @override
   void initState() {
-    super.initState();
+    super.initState(); 
+    _router = getIt.get<AppRouter>();
   }
 
   @override
@@ -65,7 +67,7 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
     return BlocConsumer<CreateAccountCubit, CreateAccountState>(
       listener: (ctx, state) => {
         if(state is CreateAccountStateSuccess) {
-          getIt.get<AppRouter>().replace(AppRoutes.signIn)
+          _router.replace(AppRoutes.signIn)
         }
       },
       builder: (ctx, state) {
@@ -73,7 +75,7 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
           children: [
             const SizedBox(height: DsSpacing.xl),
 
-            CreateAccountPageHeader(),
+            AuthPageHeader(),
 
             const SizedBox(height: DsSpacing.xl),
 
@@ -98,10 +100,9 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
 
             SizedBox(height: DsSpacing.md),
 
-            // TODO - add link to sign in page
             // TODO - localization
             DsButton.textAndLink(
-              onPressed: () => debugPrint("Already have an account"),
+              onPressed: () => _router.replace(AppRoutes.signIn),
               label: "Already have an account? ",
               linkLabel: "Sign in.",
             ),
