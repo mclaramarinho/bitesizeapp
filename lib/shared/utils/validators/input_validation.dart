@@ -1,7 +1,6 @@
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/extensions/context.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
-import 'package:adhd_app/shared/utils/navigation/global.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 
 class InputValidation {
@@ -17,7 +16,13 @@ class InputValidation {
 
   static String? validatePassword(String? v) {
     if (v == null || v.isEmpty) return 'Enter a password';
-    if (v.length < 6) return 'Password must be at least 6 characters';
+    if (v.length < 8) return 'Password must be at least 8 characters';
+    // TODO - add rule (special char - at least 1)
+    // Accepted: !@#$%&*()-_+=.,
+
+    // TODO - add rule (uppercase letter - at least 1)
+
+    // TODO - add rule (lowercase letter - at least 1)
     return null;
   }
 
