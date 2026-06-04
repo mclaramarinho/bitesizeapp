@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
 import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
+import 'package:adhd_app/shared/utils/logger/logger.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,8 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
       super(CreateAccountStateInitial());
 
   final AuthService _authService;
+
+  final Logger _logger = Logger(location: "CreateAccountCubit");
 
   void load() {
     emit(CreateAccountStateLoaded());
@@ -39,8 +42,8 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     createResult.when(
       ok: (userCredential) {
-        // Account created successfully, you can emit a success state or navigate to another page
-        print('Account created successfully: ${userCredential.user?.email}');
+        _logger.info('Account created successfully: ${userCredential.user?.email}');
+
         _emitLoadedStateSafelly(
           (cs) => emit(
             cs.copyWith(
@@ -57,7 +60,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
       },
       error: (error) {
         // Handle the error, you can emit an error state with the error message or show a snackbar
-        print('Error creating account: $error');
+        _logger.error('Error creating account: $error');
         _emitFormErrorMessage(error.message);
       },
     );

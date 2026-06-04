@@ -2,7 +2,6 @@ import 'package:adhd_app/features/auth/create_account/presentation/cubit/create_
 import 'package:adhd_app/features/auth/create_account/presentation/cubit/create_account_state.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
-import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/utils/extensions/context.dart';
 import 'package:adhd_app/shared/utils/validators/input_validation.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +47,7 @@ class _CreateAccountStepTwoFormState extends State<CreateAccountStepTwoForm> {
       context: context,
       builder: (_) => AlertDialog(
         title: Text(context.loc.profile_complete),
-        content: Text('${context.loc.profile}: ${profile.toString()}'),
+        content: Text('${context.loc.profile}: ${context.loc.profile.toString()}'),
         actions: [
           TextButton(
             onPressed: () =>
@@ -70,7 +69,6 @@ class _CreateAccountStepTwoFormState extends State<CreateAccountStepTwoForm> {
         }
 
         final formData = state.form;
-        final cubit = context.read<CreateAccountCubit>();
 
         return Form(
           key: _formKey,

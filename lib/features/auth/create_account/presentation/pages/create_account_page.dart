@@ -1,4 +1,3 @@
-import 'package:adhd_app/features/auth/create_account/domain/entities/create_account_form_steps_enum.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/cubit/create_account_cubit.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/cubit/create_account_state.dart';
 import 'package:adhd_app/features/auth/create_account/presentation/widgets/create_account_page_header.dart';
