@@ -21,25 +21,28 @@ class SignInCubit extends Cubit<SignInState> {
   /// ============================================
   /// SETTERS
   /// ============================================
-
   void setEmail(String? email) {
     emitStateSafelly<SignInStateLoaded>(
-      (st) => st.copyWith(
-        showError: false,
-        formEntity: st.formEntity != null
-            ? st.formEntity!.copyWith(email: email)
-            : SignInFormEntity(email: email ?? "", password: ""),
+      (st) => emit(
+        st.copyWith(
+          showError: false,
+          formEntity: st.formEntity != null
+              ? st.formEntity!.copyWith(email: email)
+              : SignInFormEntity(email: email ?? "", password: ""),
+        ),
       ),
     );
   }
 
   void setPassword(String? password) {
     emitStateSafelly<SignInStateLoaded>(
-      (st) => st.copyWith(
-        showError: false,
-        formEntity: st.formEntity != null
-            ? st.formEntity!.copyWith(password: password)
-            : SignInFormEntity(email: "", password: password ?? ""),
+      (st) => emit(
+        st.copyWith(
+          showError: false,
+          formEntity: st.formEntity != null
+              ? st.formEntity!.copyWith(password: password)
+              : SignInFormEntity(email: "", password: password ?? ""),
+        ),
       ),
     );
   }
@@ -72,7 +75,7 @@ class SignInCubit extends Cubit<SignInState> {
   /// ============================================
   void _emitError(String message) {
     emitStateSafelly<SignInStateLoaded>(
-      (st) => st.copyWith(errorMessage: message, showError: true),
+      (st) => emit(st.copyWith(errorMessage: message, showError: true)),
     );
   }
 

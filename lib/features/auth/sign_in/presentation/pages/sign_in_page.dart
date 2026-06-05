@@ -19,7 +19,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt.get<SignInCubit>(),
+      create: (_) => getIt.get<SignInCubit>()..load(),
       child: const _SignInPageContent(),
     );
   }
@@ -36,6 +36,7 @@ class _SignInPageContentState extends State<_SignInPageContent> {
   final _formKey = GlobalKey<FormState>();
   late SignInCubit _cubit;
   late AppRouter _router;
+  bool isButtonDisabled = true;
 
   @override
   void initState() {
@@ -50,10 +51,22 @@ class _SignInPageContentState extends State<_SignInPageContent> {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {},
       builder: ((context, state) {
+        final isInitial = state is SignInStateInitial;
+        final isLoaded = state is SignInStateLoaded;
+        final isFormFilled =
+            isLoaded &&
+            (state.formEntity != null && state.formEntity!.isFormFilled);
+        final isButtonDisabled = isInitial || !isFormFilled;
+
         return DsScaffold(
           defaultSpacing: DsSpacing.lg,
           children: [
             AuthPageHeader(),
+            if (state is SignInStateLoaded &&
+                state.showError &&
+                state.errorMessage != null) ...[
+              Text(state.errorMessage!),
+            ],
             Form(
               key: _formKey,
               child: Column(
@@ -63,20 +76,21 @@ class _SignInPageContentState extends State<_SignInPageContent> {
                     label: loc.email,
                     hint: loc.email_hint,
                     validator: InputValidation.validateEmail,
-                    // onChanged: (value) => _cubit.setEmail(value),
+                    onChanged: (value) => _cubit.setEmail(value),
                   ),
                   const SizedBox(height: DsSpacing.md),
                   DsTextInput(
                     label: loc.password,
                     hint: loc.enter_ur_password,
                     isObscurable: true,
-                    // onChanged: (value) => _cubit.setPassword(value),
+                    onChanged: (value) => _cubit.setPassword(value),
                   ),
                   const SizedBox(height: DsSpacing.lg),
                   DsButton.loadable(
                     label: loc.sign_in,
                     loadingLabel: "",
-                    onPressed: () {},
+                    onPressed: _cubit.submit,
+                    disabled: isButtonDisabled,
                   ),
                 ],
               ),

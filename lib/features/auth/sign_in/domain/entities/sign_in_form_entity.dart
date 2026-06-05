@@ -1,3 +1,4 @@
+import 'package:adhd_app/shared/utils/extensions/string.dart';
 import 'package:equatable/equatable.dart';
 
 class SignInFormEntity extends Equatable {
@@ -6,10 +7,13 @@ class SignInFormEntity extends Equatable {
 
   const SignInFormEntity({required this.email, required this.password});
 
-  SignInFormEntity copyWith({
-    String? email,
-    String? password
-  }) => SignInFormEntity(email: email ?? this.email, password: password ?? this.password)
+  SignInFormEntity copyWith({String? email, String? password}) =>
+      SignInFormEntity(
+        email: email ?? this.email,
+        password: password ?? this.password,
+      );
+
+  bool get isFormFilled => !email.isNullOrEmpty() && !password.isNullOrEmpty();
 
   @override
   List<Object?> get props => [email, password];
