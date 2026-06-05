@@ -1,0 +1,13 @@
+import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
+
+abstract class AppException extends BaseException {
+  const AppException({required super.message});
+}
+
+// TODO - localize
+class InternalErrorException extends AppException {
+  const InternalErrorException()
+    : super(
+        message: "Internal error occurred. Contact app admin to know more.",
+      );
+}

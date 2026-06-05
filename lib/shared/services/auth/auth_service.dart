@@ -1,21 +1,23 @@
 import 'package:adhd_app/shared/services/firebase/firebase_auth_listenable.dart';
 import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
+import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthService {
-  Future<Result<UserCredential, AuthException>> createAccountWithEmailAndPassword({
+  Future<Result<UserCredential, AuthException>>
+  createAccountWithEmailAndPassword({
     required String email,
     required String password,
   });
 
-  Future<Result<UserCredential, AuthException>> signInWithEmailAndPassword({
+  Future<Result<UserCredential, BaseException>> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
 
   Future<Result<void, AuthException>> signInWithCredentials({
-    required AuthCredential credentials
+    required AuthCredential credentials,
   });
 
   User? get currentUser;
