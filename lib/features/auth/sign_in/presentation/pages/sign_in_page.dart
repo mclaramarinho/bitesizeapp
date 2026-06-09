@@ -1,11 +1,14 @@
 import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_cubit.dart';
 import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_state.dart';
+import 'package:adhd_app/features/auth/sign_in/presentation/widgets/password_recovery_dialog/password_recovery_dialog_content.dart';
 import 'package:adhd_app/features/auth/widgets/auth_page_header.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
 import 'package:adhd_app/shared/di/injection.dart';
+import 'package:adhd_app/shared/services/providers/dialog/dialog_cubit.dart';
+import 'package:adhd_app/shared/services/providers/dialog/dialog_state.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
@@ -49,7 +52,32 @@ class _SignInPageContentState extends State<_SignInPageContent> {
   Widget build(BuildContext context) {
     final loc = context.loc;
     return BlocConsumer<SignInCubit, SignInState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        switch (state) {
+          case SignInStateLoaded():
+            if (!_cubit.isShowingRecoveryDialog &&
+                state.showRecoverPasswordDialog) {
+              context.read<DialogCubit>().queueDialog(
+                DialogRequest(
+                  id: 'password_recovery',
+                  title: "Recover your password",
+                  builder: (dialogContext) =>
+                      PasswordRecoveryDialogContent(cubit: _cubit),
+                  onClose: _cubit.setShowRecoverPasswordDialog,
+                ),
+              );
+            }
+            break;
+          case SignInStateRecoveryEmailSent():
+            _router.replace(AppRoutes.recoveryEmailSent);
+            break;
+          case SignInStateSuccess():
+            _router.replace(AppRoutes.home);
+            break;
+          default:
+            break;
+        }
+      },
       builder: ((context, state) {
         final isInitial = state is SignInStateInitial;
         final isLoaded = state is SignInStateLoaded;
@@ -92,6 +120,15 @@ class _SignInPageContentState extends State<_SignInPageContent> {
                     onPressed: _cubit.submit,
                     disabled: isButtonDisabled,
                   ),
+                  const SizedBox(height: DsSpacing.lg),
+
+                  // Google sign in
+                  DsButton.loadable(
+                    onPressed: () {},
+                    label: loc.continue_with_google,
+                    loadingLabel: loc.signing_in,
+                    prefixIcon: Icons.login,
+                  ),
                 ],
               ),
             ),
@@ -99,6 +136,11 @@ class _SignInPageContentState extends State<_SignInPageContent> {
               onPressed: () => _router.push(AppRoutes.createAccount),
               label: "${loc.dont_have_an_account} ",
               linkLabel: loc.create_now,
+            ),
+
+            DsButton.link(
+              onPressed: _cubit.setShowRecoverPasswordDialog,
+              label: "Recover password",
             ),
           ],
         );

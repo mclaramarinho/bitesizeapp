@@ -3,6 +3,7 @@ import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_state.
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
 import 'package:adhd_app/shared/utils/extensions/cubit.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
+import 'package:adhd_app/shared/utils/validators/input_validation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,6 +14,9 @@ class SignInCubit extends Cubit<SignInState> {
       super(SignInStateInitial());
 
   final AuthService _authService;
+
+  bool isShowingRecoveryDialog = false;
+  bool isRecoveryDialogValid = false;
 
   void load() {
     emit(SignInStateLoaded());
@@ -26,6 +30,7 @@ class SignInCubit extends Cubit<SignInState> {
       (st) => emit(
         st.copyWith(
           showError: false,
+          showErrorInRecoveryDialog: false,
           formEntity: st.formEntity != null
               ? st.formEntity!.copyWith(email: email)
               : SignInFormEntity(email: email ?? "", password: ""),
@@ -39,9 +44,36 @@ class SignInCubit extends Cubit<SignInState> {
       (st) => emit(
         st.copyWith(
           showError: false,
+          showErrorInRecoveryDialog: false,
           formEntity: st.formEntity != null
               ? st.formEntity!.copyWith(password: password)
               : SignInFormEntity(email: "", password: password ?? ""),
+        ),
+      ),
+    );
+  }
+
+  void setShowRecoverPasswordDialog() {
+    emitStateSafelly<SignInStateLoaded>(
+      (st) => emit(
+        st.copyWith(
+          showErrorInRecoveryDialog: false,
+          showRecoverPasswordDialog: !st.showRecoverPasswordDialog,
+        ),
+      ),
+    );
+  }
+
+  void setRecoveryEmail(String? email) {
+    final validation = InputValidation.validateEmail(email);
+    final isValid = validation == null;
+    emitStateSafelly<SignInStateLoaded>(
+      (st) => emit(
+        st.copyWith(
+          recoveryDialogEmail: email,
+          showErrorInRecoveryDialog: !isValid,
+          recoveryDialogErrorMessage: validation,
+          isRecoveryDialogButtonEnabled: isValid,
         ),
       ),
     );
@@ -56,7 +88,7 @@ class SignInCubit extends Cubit<SignInState> {
     final form = (state as SignInStateLoaded).formEntity!;
 
     final signInResult = await _authService.signInWithEmailAndPassword(
-      email: form.email,
+      email: form.email.trim(),
       password: form.password,
     );
 
@@ -66,6 +98,33 @@ class SignInCubit extends Cubit<SignInState> {
       },
       error: (ex) {
         _emitError(ex.message);
+      },
+    );
+  }
+
+  /// ============================================
+  /// RECOVER PASSWORD
+  /// ============================================
+  Future<void> sendRecoveryEmail() async {
+    if (state is! SignInStateLoaded) return;
+    final currentState = state as SignInStateLoaded;
+    final email = currentState.recoveryDialogEmail;
+    if (email.isNullOrEmpty()) return;
+    final sendResult = await _authService.recoverPassword(
+      email: currentState.recoveryDialogEmail!,
+    );
+
+    sendResult.when(
+      ok: (val) => emit(SignInStateRecoveryEmailSent()),
+      error: (ex) {
+        emitStateSafelly<SignInStateLoaded>(
+          (st) => emit(
+            st.copyWith(
+              showErrorInRecoveryDialog: true,
+              recoveryDialogErrorMessage: ex.message,
+            ),
+          ),
+        );
       },
     );
   }

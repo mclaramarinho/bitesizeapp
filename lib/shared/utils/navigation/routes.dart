@@ -12,10 +12,11 @@ enum AppRoutes {
     private: false,
   ),
   signIn(path: "/sign-in", builder: _loginBuilder, private: false),
-  home(
-    path: "/",
-    builder: _homeBuilder,
-    private: true,
+  home(path: "/", builder: _homeBuilder, private: true),
+  recoveryEmailSent(
+    path: "/recovery-email-sent",
+    builder: _homeBuilder, // TODO - create builder
+    private: false,
   );
 
   final String path;
@@ -35,10 +36,7 @@ enum AppRoutes {
   }
 
   GoRoute toGoRoute() {
-    return GoRoute(
-      path: path,
-      builder: builder,
-    );
+    return GoRoute(path: path, builder: builder);
   }
 
   static List<GoRoute> get allGoRoutes =>
