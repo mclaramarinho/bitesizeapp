@@ -32,3 +32,8 @@ class UserDisabledException extends AuthException {
   const UserDisabledException()
     : super(message: "User has been disabled. Contact admin to know more.");
 }
+
+class InvalidActionCodeException extends AuthException {
+  const InvalidActionCodeException()
+    : super(message: "This code has expired or is not correct.");
+}

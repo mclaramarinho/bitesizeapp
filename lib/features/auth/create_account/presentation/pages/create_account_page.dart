@@ -34,12 +34,11 @@ class _CreateAccountPageContent extends StatefulWidget {
 }
 
 class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
-  bool _loadingGoogle = false;
   late AppRouter _router;
 
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
     _router = getIt.get<AppRouter>();
   }
 
@@ -49,10 +48,10 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
   }
 
   Future<void> _simulateSignUpWithGoogle() async {
-    setState(() => _loadingGoogle = true);
+    // setState(() => _loadingGoogle = true);
     // TODO: replace this simulation with real Google sign-in wiring
     await Future.delayed(const Duration(seconds: 1));
-    setState(() => _loadingGoogle = false);
+    // setState(() => _loadingGoogle = false);
     if (!mounted) return;
   }
 
@@ -61,9 +60,8 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
     final loc = context.loc;
     return BlocConsumer<CreateAccountCubit, CreateAccountState>(
       listener: (ctx, state) => {
-        if(state is CreateAccountStateSuccess) {
-          _router.replace(AppRoutes.home)
-        }
+        if (state is CreateAccountStateSuccess)
+          {_router.replace(AppRoutes.home)},
       },
       builder: (ctx, state) {
         return DsScaffold(
@@ -85,9 +83,9 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
             const SizedBox(height: DsSpacing.md),
             DsDivider.withText(context, loc.or),
             const SizedBox(height: DsSpacing.md),
-            if(state is CreateAccountStateLoaded &&
-                state.showFormErrorMessage
-                && state.formErrorMessage != null) ...[
+            if (state is CreateAccountStateLoaded &&
+                state.showFormErrorMessage &&
+                state.formErrorMessage != null) ...[
               Text(state.formErrorMessage!),
             ],
 

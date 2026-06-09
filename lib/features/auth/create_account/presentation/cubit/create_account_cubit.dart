@@ -1,6 +1,6 @@
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
-import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
+import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/extensions/cubit.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
@@ -41,9 +41,9 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     final [validEmail, validPassword] = canCreateAccount;
 
-    final Result<UserCredential, AuthException> createResult =
+    final Result<UserCredential, BaseException> createResult =
         await _authService.createAccountWithEmailAndPassword(
-          email: validEmail,
+          email: validEmail.trim(),
           password: validPassword,
         );
 

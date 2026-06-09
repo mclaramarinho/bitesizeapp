@@ -15,7 +15,7 @@ class FirebaseAuthService implements AuthService {
 
   static final _logger = Logger(location: "FirebaseAuthService");
   @override
-  Future<Result<UserCredential, AuthException>>
+  Future<Result<UserCredential, BaseException>>
   createAccountWithEmailAndPassword({
     required String email,
     required String password,
@@ -24,19 +24,11 @@ class FirebaseAuthService implements AuthService {
       final UserCredential credential = await _instance
           .createUserWithEmailAndPassword(email: email, password: password);
       return Ok(credential);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        _logger.error('The password provided is too weak.');
-        return Error(WeakPasswordException());
-      } else if (e.code == 'email-already-in-use') {
-        _logger.error('The account already exists for that email.');
-        return Error(UserAlreadyExistsException());
-      }
-      _logger.error('Unexpected error occurred: ${e.message}');
-      return Error(GenericAuthException());
-    } catch (e) {
-      _logger.error(e.toString());
-      return Error(GenericAuthException());
+    } on FirebaseAuthException catch (ex) {
+      return _handleAuthError<UserCredential>(ex);
+    } catch (ex) {
+      _logger.error(ex.toString());
+      return Error(UnknownErrorException());
     }
   }
 
@@ -53,45 +45,10 @@ class FirebaseAuthService implements AuthService {
 
       return Ok(authResult);
     } on FirebaseAuthException catch (ex) {
-      switch (ex.code) {
-        case "invalid-email" ||
-            "wrong-password" ||
-            "invalid-credential" ||
-            "INVALID_LOGIN_CREDENTIALS":
-          _logger.error(
-            "${InvalidCredentialsException().message}: ${ex.toString()}",
-          );
-          return Error(InvalidCredentialsException());
-        case "operation-not-allowed":
-          _logger.error(
-            "${InternalErrorException().message}: ${ex.toString()}",
-          );
-          return Error(InternalErrorException());
-        case "user-not-found":
-          _logger.error(
-            "${UserDoesNotExistException().message}: ${ex.toString()}",
-          );
-          return Error(UserDoesNotExistException());
-        case "user-disabled":
-          _logger.error("${UserDisabledException().message}: ${ex.toString()}");
-          return Error(UserDisabledException());
-        case "network-request-failed":
-          _logger.error(
-            "${NetworkRequestFailedException().message}: ${ex.toString()}",
-          );
-          return Error(NetworkRequestFailedException());
-        case "too-many-requests":
-          _logger.error(
-            "${TooManyRequestsException().message}: ${ex.toString()}",
-          );
-          return Error(TooManyRequestsException());
-        default:
-          _logger.error("${GenericAuthException().message}: ${ex.toString()}");
-          return Error(GenericAuthException());
-      }
+      return _handleAuthError<UserCredential>(ex);
     } on Exception catch (ex) {
-      _logger.error("${GenericAuthException().message}: ${ex.toString()}");
-      return Error(GenericAuthException());
+      _logger.error("${UnknownErrorException().message}: ${ex.toString()}");
+      return Error(UnknownErrorException());
     }
   }
 
@@ -104,9 +61,96 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
+  Future<Result<bool, BaseException>> recoverPassword({
+    required String email,
+  }) async {
+    try {
+      await _instance.sendPasswordResetEmail(email: email);
+      return Ok(true);
+    } on FirebaseAuthException catch (ex) {
+      return _handleAuthError<bool>(ex);
+    } on Exception catch (ex) {
+      _logger.error("${UnknownErrorException().message}: ${ex.toString()}");
+      return Error(UnknownErrorException());
+    }
+  }
+
+  @override
+  Future<Result<bool, BaseException>> completePasswordRecovery({
+    required String code,
+    required String newPassword,
+  }) async {
+    try {
+      await _instance.confirmPasswordReset(
+        code: code,
+        newPassword: newPassword,
+      );
+      return Ok(true);
+    } on FirebaseAuthException catch (ex) {
+      return _handleAuthError(ex);
+    } on Exception catch (ex) {
+      _logger.error("${UnknownErrorException().message}: ${ex.toString()}");
+      return Error(UnknownErrorException());
+    }
+  }
+
+  @override
   FirebaseAuthStateListenable get stateListenable =>
       FirebaseAuthStateListenable();
 
   @override
   User? get currentUser => _instance.currentUser;
+
+  Error<T, BaseException> _handleAuthError<T>(FirebaseAuthException ex) {
+    switch (ex.code) {
+      case "invalid-email" ||
+          "wrong-password" ||
+          "invalid-credential" ||
+          "INVALID_LOGIN_CREDENTIALS" ||
+          "auth/invalid-email":
+        _logger.error(
+          "${InvalidCredentialsException().message}: ${ex.toString()}",
+        );
+        return Error(InvalidCredentialsException());
+      case 'weak-password':
+        _logger.error('The password provided is too weak.');
+        return Error(WeakPasswordException());
+      case 'email-already-in-use':
+        _logger.error('The account already exists for that email.');
+        return Error(UserAlreadyExistsException());
+      case "operation-not-allowed" ||
+          "auth/missing-android-pkg-name" ||
+          "auth/missing-continue-uri" ||
+          "auth/missing-ios-bundle-id" ||
+          "auth/unauthorized-continue-uri":
+        _logger.error("${InternalErrorException().message}: ${ex.toString()}");
+        return Error(InternalErrorException());
+      case "user-not-found" || "auth/user-not-found":
+        _logger.error(
+          "${UserDoesNotExistException().message}: ${ex.toString()}",
+        );
+        return Error(UserDoesNotExistException());
+      case "user-disabled":
+        _logger.error("${UserDisabledException().message}: ${ex.toString()}");
+        return Error(UserDisabledException());
+      case "network-request-failed":
+        _logger.error(
+          "${NetworkRequestFailedException().message}: ${ex.toString()}",
+        );
+        return Error(NetworkRequestFailedException());
+      case "too-many-requests":
+        _logger.error(
+          "${TooManyRequestsException().message}: ${ex.toString()}",
+        );
+        return Error(TooManyRequestsException());
+      case "expired-action-code" || "invalid-action-code":
+        _logger.error(
+          "${InvalidActionCodeException().message}: ${ex.toString()}",
+        );
+        return Error(InvalidActionCodeException());
+      default:
+        _logger.error("${GenericAuthException().message}: ${ex.toString()}");
+        return Error(GenericAuthException());
+    }
+  }
 }

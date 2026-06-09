@@ -5,7 +5,7 @@ import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthService {
-  Future<Result<UserCredential, AuthException>>
+  Future<Result<UserCredential, BaseException>>
   createAccountWithEmailAndPassword({
     required String email,
     required String password,
@@ -18,6 +18,13 @@ abstract class AuthService {
 
   Future<Result<void, AuthException>> signInWithCredentials({
     required AuthCredential credentials,
+  });
+
+  Future<Result<bool, BaseException>> recoverPassword({required String email});
+
+  Future<Result<bool, BaseException>> completePasswordRecovery({
+    required String code,
+    required String newPassword,
   });
 
   User? get currentUser;

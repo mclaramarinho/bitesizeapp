@@ -11,3 +11,8 @@ class InternalErrorException extends AppException {
         message: "Internal error occurred. Contact app admin to know more.",
       );
 }
+
+class UnknownErrorException extends AppException {
+  const UnknownErrorException()
+    : super(message: "Unknown error occurred. Contact app admin to know more.");
+}
