@@ -21,12 +21,19 @@ class DsButton {
     );
   }
 
-  static Widget link({required VoidCallback onPressed, required String label}) {
+  static Widget link({
+    required VoidCallback onPressed,
+    required String label,
+    Color? color,
+    TextAlign? textAlign,
+  }) {
     return Center(
       child: Text(
         label,
+        textAlign: textAlign ?? TextAlign.left,
         style: DsThemes.current.textTheme.bodyLarge!.copyWith(
           decoration: TextDecoration.underline,
+          color: color,
         ),
       ).onTap(onPressed),
     );
@@ -36,12 +43,15 @@ class DsButton {
     required VoidCallback onPressed,
     required String label,
     required String linkLabel,
+    Color? color,
+    TextAlign? textAlign,
   }) {
     return Center(
       child: RichText(
+        textAlign: textAlign ?? TextAlign.left,
         text: TextSpan(
           text: label,
-          style: DsThemes.current.textTheme.bodyLarge,
+          style: DsThemes.current.textTheme.bodyLarge?.copyWith(color: color),
           children: [
             TextSpan(
               text: linkLabel,

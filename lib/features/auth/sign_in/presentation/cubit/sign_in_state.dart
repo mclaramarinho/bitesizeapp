@@ -1,5 +1,4 @@
 import 'package:adhd_app/features/auth/sign_in/domain/entities/sign_in_form_entity.dart';
-import 'package:adhd_app/shared/utils/validators/input_validation.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SignInState extends Equatable {}

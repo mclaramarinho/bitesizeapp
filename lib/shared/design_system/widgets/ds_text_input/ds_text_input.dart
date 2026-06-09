@@ -3,7 +3,7 @@ import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:flutter/material.dart';
 
 class DsTextInput extends StatefulWidget {
-  DsTextInput({
+  const DsTextInput({
     required this.label,
     required this.hint,
     this.validator,

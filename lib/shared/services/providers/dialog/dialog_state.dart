@@ -23,7 +23,7 @@ class DialogRequest extends Equatable {
 class DialogState extends Equatable {
   final List<DialogRequest> queue;
 
-  DialogState({this.queue = const []});
+  const DialogState({this.queue = const []});
 
   DialogRequest? get currentDialog => queue.isNotEmpty ? queue.first : null;
 
@@ -32,6 +32,5 @@ class DialogState extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [queue];
 }

@@ -1,4 +1,5 @@
 import 'package:adhd_app/features/auth/create_account/presentation/pages/create_account_page.dart';
+import 'package:adhd_app/features/auth/password_recovery/presentation/pages/password_recovery_email_sent_page.dart';
 import 'package:adhd_app/features/auth/sign_in/presentation/pages/sign_in_page.dart';
 import 'package:adhd_app/features/home/presentation/pages/home_page.dart';
 import 'package:adhd_app/shared/utils/exceptions/navigation/navigation_exception.dart';
@@ -15,7 +16,7 @@ enum AppRoutes {
   home(path: "/", builder: _homeBuilder, private: true),
   recoveryEmailSent(
     path: "/recovery-email-sent",
-    builder: _homeBuilder, // TODO - create builder
+    builder: _passwordRecoveryEmailSentBuilder,
     private: false,
   );
 
@@ -64,4 +65,11 @@ Widget _createAccountBuilder(BuildContext context, GoRouterState state) {
 
 Widget _homeBuilder(BuildContext context, GoRouterState state) {
   return const HomePage();
+}
+
+Widget _passwordRecoveryEmailSentBuilder(
+  BuildContext context,
+  GoRouterState state,
+) {
+  return const PasswordRecoveryPage();
 }
