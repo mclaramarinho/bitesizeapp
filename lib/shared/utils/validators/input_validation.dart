@@ -17,12 +17,23 @@ class InputValidation {
   static String? validatePassword(String? v) {
     if (v == null || v.isEmpty) return 'Enter a password';
     if (v.length < 8) return 'Password must be at least 8 characters';
-    // TODO - add rule (special char - at least 1)
-    // Accepted: !@#$%&*()-_+=.,
 
-    // TODO - add rule (uppercase letter - at least 1)
+    // Rule: At least one uppercase letter
+    if (!v.contains(RegExp(r'[A-Z]'))) {
+      return 'Password must contain at least 1 uppercase letter';
+    }
 
-    // TODO - add rule (lowercase letter - at least 1)
+    // Rule: At least one lowercase letter
+    if (!v.contains(RegExp(r'[a-z]'))) {
+      return 'Password must contain at least 1 lowercase letter';
+    }
+
+    // Rule: At least one special character from your allowed list
+    // Escaped characters that have special meaning in RegEx (\-, \., \+)
+    if (!v.contains(RegExp(r'[!@#$%&*()\-_\+=.,]'))) {
+      return 'Password must contain at least 1 special character (!@#\$%&*()-_+=.,)';
+    }
+
     return null;
   }
 

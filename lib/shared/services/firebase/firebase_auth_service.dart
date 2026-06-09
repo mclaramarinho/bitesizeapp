@@ -53,14 +53,6 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<Result<void, AuthException>> signInWithCredentials({
-    required AuthCredential credentials,
-  }) async {
-    // TODO: implement signInWithCredentials
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Result<bool, BaseException>> recoverPassword({
     required String email,
   }) async {
