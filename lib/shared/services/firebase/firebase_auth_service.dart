@@ -76,25 +76,6 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<Result<bool, BaseException>> completePasswordRecovery({
-    required String code,
-    required String newPassword,
-  }) async {
-    try {
-      await _instance.confirmPasswordReset(
-        code: code,
-        newPassword: newPassword,
-      );
-      return Ok(true);
-    } on FirebaseAuthException catch (ex) {
-      return _handleAuthError(ex);
-    } on Exception catch (ex) {
-      _logger.error("${UnknownErrorException().message}: ${ex.toString()}");
-      return Error(UnknownErrorException());
-    }
-  }
-
-  @override
   FirebaseAuthStateListenable get stateListenable =>
       FirebaseAuthStateListenable();
 

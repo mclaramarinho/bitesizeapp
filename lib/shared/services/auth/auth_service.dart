@@ -22,11 +22,6 @@ abstract class AuthService {
 
   Future<Result<bool, BaseException>> recoverPassword({required String email});
 
-  Future<Result<bool, BaseException>> completePasswordRecovery({
-    required String code,
-    required String newPassword,
-  });
-
   User? get currentUser;
 
   FirebaseAuthStateListenable get stateListenable;
