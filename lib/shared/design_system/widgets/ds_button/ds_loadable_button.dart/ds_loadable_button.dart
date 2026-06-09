@@ -62,7 +62,10 @@ class _DSLoadableButtonState extends State<DSLoadableButton> {
       ),
       onPressed: onPressedCallback,
       icon: _loading ? loadingIndicator : prefixIconWidget,
-      label: Text(_loading ? widget.loadingLabel : widget.label),
+      label: Text(
+        _loading ? widget.loadingLabel : widget.label,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

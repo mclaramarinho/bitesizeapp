@@ -1,9 +1,13 @@
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/firebase/firebase_initializer.dart' as FirebaseInitializer;
+import 'package:adhd_app/shared/firebase/firebase_initializer.dart'
+    as FirebaseInitializer;
 import 'package:adhd_app/shared/services/env/env_service.dart';
+import 'package:adhd_app/shared/services/providers/dialog/dialog_cubit.dart';
+import 'package:adhd_app/shared/services/providers/dialog/dialog_manager.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
@@ -16,8 +20,8 @@ Future<void> main() async {
   /// Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseInitializer.init();
-  
-  runApp(const MyApp());  
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,17 +29,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: DsThemes.freeDark,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-      ],
-      routerConfig: getIt.get<AppRouter>().router,
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (_) => getIt.get<DialogCubit>())],
+      child: MaterialApp.router(
+        theme: DsThemes.freeDark,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [Locale('en')],
+        routerConfig: getIt.get<AppRouter>().router,
+        builder: (context, child) {
+          return DialogManager(child: child!);
+        },
+      ),
     );
   }
 }

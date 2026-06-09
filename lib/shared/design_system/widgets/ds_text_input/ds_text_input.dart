@@ -3,12 +3,13 @@ import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:flutter/material.dart';
 
 class DsTextInput extends StatefulWidget {
-  const DsTextInput({
+  DsTextInput({
     required this.label,
     required this.hint,
     this.validator,
     this.isObscurable = false,
     this.onChanged,
+    this.initialValue,
     super.key,
   });
 
@@ -16,7 +17,8 @@ class DsTextInput extends StatefulWidget {
   final String label;
   final String hint;
   final bool? isObscurable;
-  final void Function(String)? onChanged;
+  final void Function(String?)? onChanged;
+  final String? initialValue;
 
   @override
   State<DsTextInput> createState() => _DsTextInputState();
@@ -34,7 +36,8 @@ class _DsTextInputState extends State<DsTextInput> {
 
   String? handleValidation(String? v) {
     if (widget.validator != null) {
-      return widget.validator!(v);
+      final result = widget.validator!(v);
+      return result;
     }
     return null;
   }
@@ -45,19 +48,19 @@ class _DsTextInputState extends State<DsTextInput> {
       controller: _textController,
       keyboardType: TextInputType.emailAddress,
       onChanged: widget.onChanged,
+      initialValue: widget.initialValue,
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hint,
-        suffix:
-            widget.isObscurable! 
-                ? Icon(
-                  _isObscured ? Icons.visibility : Icons.visibility_off,
-                  size: DsSpacing.lg,
-                ).onTap(() => setState(() => _isObscured = !_isObscured))
-                : null,
+        suffix: widget.isObscurable!
+            ? Icon(
+                _isObscured ? Icons.visibility : Icons.visibility_off,
+                size: DsSpacing.lg,
+              ).onTap(() => setState(() => _isObscured = !_isObscured))
+            : null,
       ),
       obscureText: widget.isObscurable == true ? _isObscured : false,
-      validator: (v) => handleValidation(v),
+      validator: handleValidation,
     );
   }
 }
