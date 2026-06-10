@@ -102,6 +102,19 @@ class SignInCubit extends Cubit<SignInState> {
     );
   }
 
+  Future<void> signInWithGoogle() async {
+    final createResult = await _authService.signInWithGoogle();
+    createResult.when(
+      ok: (val) {
+        // TODO - create profile on the database if it does not exist yet
+        emit(SignInStateSuccess());
+      },
+      error: (error) {
+        _emitError(error.message);
+      },
+    );
+  }
+
   /// ============================================
   /// RECOVER PASSWORD
   /// ============================================

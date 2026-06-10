@@ -124,7 +124,7 @@ class _SignInPageContentState extends State<_SignInPageContent> {
 
                   // Google sign in
                   DsButton.loadable(
-                    onPressed: () {},
+                    onPressed: _cubit.signInWithGoogle,
                     label: loc.continue_with_google,
                     loadingLabel: loc.signing_in,
                     prefixIcon: Icons.login,
