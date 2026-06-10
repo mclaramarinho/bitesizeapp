@@ -73,6 +73,20 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     );
   }
 
+  Future<void> createWithGoogle() async {
+    final createResult = await _authService.signInWithGoogle();
+    createResult.when(
+      ok: (val) {
+        // TODO - create profile on the database
+        emit(CreateAccountStateSuccess());
+      },
+      error: (error) {
+        _logger.error('${loc.error_creating_account}: $error');
+        _emitFormErrorMessage(error.message);
+      },
+    );
+  }
+
   // ========================================================================
   // SETTERS
   // ========================================================================

@@ -10,6 +10,8 @@ abstract class AuthService {
     required String password,
   });
 
+  Future<Result<UserCredential, BaseException>> signInWithGoogle();
+
   Future<Result<UserCredential, BaseException>> signInWithEmailAndPassword({
     required String email,
     required String password,

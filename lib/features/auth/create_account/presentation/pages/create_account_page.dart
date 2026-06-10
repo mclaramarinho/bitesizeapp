@@ -74,7 +74,7 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
 
             // Google sign up
             DsButton.loadable(
-              onPressed: _simulateSignUpWithGoogle,
+              onPressed: ctx.read<CreateAccountCubit>().createWithGoogle,
               label: loc.continue_with_google,
               loadingLabel: loc.signing_in,
               prefixIcon: Icons.login,

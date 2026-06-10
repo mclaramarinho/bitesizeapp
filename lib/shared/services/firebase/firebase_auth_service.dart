@@ -33,6 +33,19 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
+  Future<Result<UserCredential, BaseException>> signInWithGoogle() async {
+    try {
+      final res = await _instance.signInWithProvider(GoogleAuthProvider());
+      return Ok(res);
+    } on FirebaseAuthException catch (ex) {
+      return _handleAuthError(ex);
+    } catch (ex) {
+      _logger.error("${UnknownErrorException().message}: ${ex.toString()}");
+      return Error(UnknownErrorException());
+    }
+  }
+
+  @override
   Future<Result<UserCredential, BaseException>> signInWithEmailAndPassword({
     required String email,
     required String password,
