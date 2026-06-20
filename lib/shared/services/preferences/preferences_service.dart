@@ -1,4 +1,3 @@
-// TODO - use Result pattern
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 

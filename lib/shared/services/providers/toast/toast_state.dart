@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:adhd_app/shared/design_system/constants/ds_colors.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

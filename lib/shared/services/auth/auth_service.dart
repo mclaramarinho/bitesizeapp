@@ -5,7 +5,6 @@ import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthService {
-  // TODO - return a DTO instead of a Firebase-specific class
   Future<Result<AuthCredentialDto, BaseException>>
   createAccountWithEmailAndPassword({
     required String email,

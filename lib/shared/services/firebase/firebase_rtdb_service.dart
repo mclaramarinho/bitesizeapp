@@ -34,6 +34,7 @@ class FirebaseRtdbService implements DatabaseService {
   /// collection: AppDbCollections.users
   /// pathParams: ['123']
   /// Results in /users/123
+  @override
   Future<Result<void, DbException>> write(
     AppDbCollections collection, {
     required Map<String, dynamic> data,
