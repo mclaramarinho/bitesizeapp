@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
 
+// TODO (docs)
 enum AppDbCollections {
   users(path: "users");
 

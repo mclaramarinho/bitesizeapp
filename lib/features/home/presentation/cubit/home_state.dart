@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// TODO (docs)
 abstract class HomeState extends Equatable {}
 
 class HomeStateInitial extends HomeState {

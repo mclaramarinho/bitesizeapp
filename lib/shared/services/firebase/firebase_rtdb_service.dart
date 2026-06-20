@@ -7,6 +7,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+// TODO (docs)
+// TODO (implement)
 @Injectable(as: DatabaseService)
 class FirebaseRtdbService implements DatabaseService {
   static final FirebaseDatabase _instance = FirebaseDatabase.instance;

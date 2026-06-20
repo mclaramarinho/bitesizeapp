@@ -1,3 +1,5 @@
+// TODO (localize)
+// TODO (docs)
 abstract class BaseException implements Exception {
   final String _message;
 

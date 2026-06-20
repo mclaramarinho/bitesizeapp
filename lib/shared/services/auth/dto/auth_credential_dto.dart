@@ -1,3 +1,4 @@
+// TODO (docs)
 class AuthCredentialDto {
   final String? email;
   final String? uid;

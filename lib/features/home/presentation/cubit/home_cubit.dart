@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+// TODO (docs)
 @injectable
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit({required AuthService authService})

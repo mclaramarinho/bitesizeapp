@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:flutter/material.dart';
 
+// TODO (docs)
 class DsScaffold extends StatelessWidget {
   final List<Widget> children;
   final PreferredSizeWidget? appBar;

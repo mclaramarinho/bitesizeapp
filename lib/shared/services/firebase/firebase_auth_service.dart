@@ -10,6 +10,7 @@ import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
+// TODO (docs)
 @Injectable(as: AuthService)
 class FirebaseAuthService implements AuthService {
   static final FirebaseAuth _instance = FirebaseAuth.instance;

@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 
-// TODO - localize
+// TODO (localize)
+// TODO (docs)
 abstract class PreferencesException extends BaseException {
   const PreferencesException({required super.message});
 }

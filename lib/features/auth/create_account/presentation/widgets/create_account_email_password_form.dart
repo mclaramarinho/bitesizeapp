@@ -31,7 +31,6 @@ class _CreateAccountWithEmailPasswordFormState
     if (!_formKey.currentState!.validate()) return;
     _cubit.createWithEmailAndPassword();
     await Future.delayed(const Duration(seconds: 1));
-    // setState(() => _loadingEmail = false);
     if (!mounted) return;
   }
 

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
+// TODO (docs)
 @injectable
 class AppRouter {
   static final GoRouter _router = GoRouter(

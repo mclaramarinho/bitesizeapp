@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 
-// TODO - localize
+// TODO (localize)
+// TODO (docs)
 abstract class NetworkException extends BaseException {
   const NetworkException({required super.message});
 }

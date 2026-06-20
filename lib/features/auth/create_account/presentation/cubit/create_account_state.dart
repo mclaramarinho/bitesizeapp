@@ -1,6 +1,8 @@
 import 'package:adhd_app/features/auth/create_account/domain/entities/create_account_form_entity.dart';
 import 'package:equatable/equatable.dart';
 
+// TODO (docs)
+
 abstract class CreateAccountState extends Equatable {}
 
 class CreateAccountStateInitial extends CreateAccountState {

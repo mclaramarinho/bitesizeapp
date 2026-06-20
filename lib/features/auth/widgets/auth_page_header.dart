@@ -6,22 +6,19 @@ import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
 
-enum AuthPageHeaderType {
-  signIn,
-  createAccount;
-}
+// TODO (docs)
+enum AuthPageHeaderType { signIn, createAccount }
 
 class AuthPageHeader extends StatelessWidget {
   const AuthPageHeader({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     final route = getIt.get<AppRouter>().matchedLocation;
     final loc = context.loc;
     String? pageTitle;
 
-    switch(route) {
+    switch (route) {
       case AppRoutes.createAccount:
         pageTitle = loc.create_your_account.toUpperCase();
         break;

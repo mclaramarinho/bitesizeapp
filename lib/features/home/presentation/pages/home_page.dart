@@ -5,6 +5,7 @@ import 'package:adhd_app/shared/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// TODO (localize)
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

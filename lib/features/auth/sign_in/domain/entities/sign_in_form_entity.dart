@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/utils/extensions/string.dart';
 import 'package:equatable/equatable.dart';
 
+// TODO (docs)
 class SignInFormEntity extends Equatable {
   final String email;
   final String password;

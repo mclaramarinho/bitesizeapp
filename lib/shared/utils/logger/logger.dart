@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/utils/extensions/string.dart';
 import 'package:flutter/widgets.dart';
 
+// TODO (docs)
 class Logger {
   const Logger({required this.location});
 

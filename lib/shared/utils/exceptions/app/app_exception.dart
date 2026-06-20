@@ -4,7 +4,8 @@ abstract class AppException extends BaseException {
   const AppException({required super.message});
 }
 
-// TODO - localize
+// TODO (localize)
+// TODO (docs)
 class InternalErrorException extends AppException {
   const InternalErrorException()
     : super(

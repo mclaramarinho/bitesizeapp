@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+// TODO (docs)
 enum ToastType {
   info(icon: Icons.info),
   warning(icon: Icons.warning),

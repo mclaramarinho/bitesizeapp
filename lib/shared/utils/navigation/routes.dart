@@ -6,6 +6,7 @@ import 'package:adhd_app/shared/utils/exceptions/navigation/navigation_exception
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+// TODO (docs)
 enum AppRoutes {
   createAccount(
     path: "/create-account",

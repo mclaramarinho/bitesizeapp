@@ -47,14 +47,6 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
     super.dispose();
   }
 
-  Future<void> _simulateSignUpWithGoogle() async {
-    // setState(() => _loadingGoogle = true);
-    // TODO: replace this simulation with real Google sign-in wiring
-    await Future.delayed(const Duration(seconds: 1));
-    // setState(() => _loadingGoogle = false);
-    if (!mounted) return;
-  }
-
   @override
   Widget build(BuildContext context) {
     final loc = context.loc;

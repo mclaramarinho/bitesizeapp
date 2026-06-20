@@ -106,7 +106,7 @@ class SignInCubit extends Cubit<SignInState> {
     final createResult = await _authService.signInWithGoogle();
     createResult.when(
       ok: (val) {
-        // TODO - create profile on the database if it does not exist yet
+        // TODO (implement) - create profile on the database if it does not exist yet
         emit(SignInStateSuccess());
       },
       error: (error) {
@@ -151,7 +151,7 @@ class SignInCubit extends Cubit<SignInState> {
     );
   }
 
-  // TODO - localize messages
+  // TODO (localize)
   bool _validateForm() {
     if (state is! SignInStateLoaded) return false;
     final form = (state as SignInStateLoaded).formEntity;

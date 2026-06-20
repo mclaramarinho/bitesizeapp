@@ -4,15 +4,13 @@ import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 
+// TODO (docs)
 class DsDialog {
   static void show(
     BuildContext? context, {
     required WidgetBuilder bodyBuilder,
     String? title,
     String? subtitle,
-    // List<Widget>? body,
-    // Widget? leftActionButton,
-    // Widget? rightActionButton,
     Function? onClosed,
   }) {
     final router = getIt.get<AppRouter>();

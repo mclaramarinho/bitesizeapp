@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// TODO (docs)
 class CreateAccountFormEntity extends Equatable {
   final String? email;
   final String? password;

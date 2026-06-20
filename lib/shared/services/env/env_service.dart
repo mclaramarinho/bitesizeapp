@@ -11,6 +11,7 @@ abstract class EnvService {
   Result<String?, BaseException> get(String key);
 }
 
+// TODO (docs)
 @Injectable(as: EnvService)
 class EnvServiceImpl implements EnvService {
   static final _instance = DotEnv();

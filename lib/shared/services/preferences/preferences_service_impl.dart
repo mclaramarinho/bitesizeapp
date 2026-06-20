@@ -7,6 +7,7 @@ import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO (docs)
 @Injectable(as: PreferencesService)
 class PreferencesServiceImpl implements PreferencesService {
   late SharedPreferencesAsync? _instance;

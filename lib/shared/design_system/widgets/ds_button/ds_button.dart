@@ -4,6 +4,7 @@ import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+// TODO (docs)
 class DsButton {
   static Widget loadable({
     required TaskCallback onPressed,

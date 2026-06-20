@@ -2,6 +2,7 @@ import 'package:adhd_app/shared/services/providers/dialog/dialog_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+// TODO (docs)
 @injectable
 class DialogCubit extends Cubit<DialogState> {
   DialogCubit() : super(DialogState());

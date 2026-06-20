@@ -1,12 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+// TODO (docs)
 extension ExtWidget on Widget {
   Widget onTap(GestureTapCallback callback) {
-    return GestureDetector(
-      onTap: callback,
-      child: this,
-    );
+    return GestureDetector(onTap: callback, child: this);
   }
 }
 

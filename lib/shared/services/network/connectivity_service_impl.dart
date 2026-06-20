@@ -2,6 +2,7 @@ import 'package:adhd_app/shared/services/network/connectivity_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
+// TODO (docs)
 @Injectable(as: ConnectivityService)
 class ConnectivityServiceImpl implements ConnectivityService {
   final InternetConnection _internetConnection = InternetConnection();

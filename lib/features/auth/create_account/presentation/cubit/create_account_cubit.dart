@@ -50,7 +50,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     createResult.when(
       ok: (userCredential) {
         _logger.info('Account created successfully: ${userCredential.email}');
-        // TODO - create profile on the database
+        // TODO (implement) - create profile on the database
         emitStateSafelly<CreateAccountStateLoaded>(
           (cs) => emit(
             cs.copyWith(
@@ -75,7 +75,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     final createResult = await _authService.signInWithGoogle();
     createResult.when(
       ok: (_) {
-        // TODO - create profile on the database
+        // TODO (implement) - create profile on the database
         emit(CreateAccountStateSuccess());
       },
       error: (error) {

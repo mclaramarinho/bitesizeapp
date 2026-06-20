@@ -4,6 +4,7 @@ import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// TODO (docs)
 abstract class AuthService {
   Future<Result<AuthCredentialDto, BaseException>>
   createAccountWithEmailAndPassword({

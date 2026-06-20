@@ -1,19 +1,15 @@
-import 'package:adhd_app/shared/services/db/database_service.dart';
 import 'package:adhd_app/shared/services/network/connectivity_service.dart';
 import 'package:adhd_app/shared/services/providers/toast/toast_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+// TODO (docs)
 @injectable
 class ToastCubit extends Cubit<ToastState> {
-  ToastCubit({
-    required DatabaseService databaseService,
-    required ConnectivityService connectivityService,
-  }) : _databaseService = databaseService,
-       _connectivityService = connectivityService,
-       super(ToastState());
+  ToastCubit({required ConnectivityService connectivityService})
+    : _connectivityService = connectivityService,
+      super(ToastState());
 
-  final DatabaseService _databaseService;
   final ConnectivityService _connectivityService;
 
   bool? wasConnected = false;

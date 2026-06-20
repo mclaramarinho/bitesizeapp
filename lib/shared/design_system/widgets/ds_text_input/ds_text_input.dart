@@ -2,6 +2,7 @@ import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:flutter/material.dart';
 
+// TODO (docs)
 class DsTextInput extends StatefulWidget {
   const DsTextInput({
     required this.label,

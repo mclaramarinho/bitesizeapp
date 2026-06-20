@@ -16,6 +16,8 @@ import 'package:adhd_app/shared/utils/validators/input_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// TODO (localize)
+
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 

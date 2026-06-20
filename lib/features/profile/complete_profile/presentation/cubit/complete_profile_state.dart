@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// TODO (docs)
 abstract class CompleteProfileState extends Equatable {}
 
 class CompleteProfileStateInitial extends CompleteProfileState {

@@ -3,6 +3,8 @@ import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 
+// TODO (docs)
+// TODO (localize)
 class InputValidation {
   static String? validateEmail(String? v) {
     if (v == null || v.trim().isEmpty) return 'Please enter your email';

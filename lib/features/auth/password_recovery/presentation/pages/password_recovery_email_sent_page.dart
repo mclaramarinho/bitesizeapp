@@ -7,6 +7,7 @@ import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
 
+// TODO (localize)
 class PasswordRecoveryPage extends StatelessWidget {
   const PasswordRecoveryPage({super.key});
   @override
@@ -22,7 +23,7 @@ class PasswordRecoveryPage extends StatelessWidget {
           "If an account is linked to that email, you will receive a link to reset your password.",
           style: DsThemes.currentTextTheme.bodyLarge,
         ),
-        // TODO - implement this functionality
+        // TODO (implement)
         Container(
           color: DsThemes.current.colorScheme.surface,
           padding: EdgeInsets.all(DsSpacing.md),

@@ -6,6 +6,7 @@ import 'package:adhd_app/shared/services/providers/toast/toast_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// TODO (docs)
 class ToastManager extends StatefulWidget {
   final Widget child;
   const ToastManager({required this.child, super.key});

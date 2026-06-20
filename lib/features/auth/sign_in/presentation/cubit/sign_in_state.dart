@@ -1,6 +1,7 @@
 import 'package:adhd_app/features/auth/sign_in/domain/entities/sign_in_form_entity.dart';
 import 'package:equatable/equatable.dart';
 
+// TODO (docs)
 abstract class SignInState extends Equatable {}
 
 class SignInStateInitial extends SignInState {
