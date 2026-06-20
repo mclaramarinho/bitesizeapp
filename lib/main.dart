@@ -29,12 +29,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseInitializer.init();
 
+  /// Initialize Database
   bool isDbInit = false;
   getIt.get<DatabaseService>().init().when(
     ok: (_) => isDbInit = true,
     error: (_) {},
   );
-
   if (!isDbInit) return;
 
   runApp(const MyApp());
