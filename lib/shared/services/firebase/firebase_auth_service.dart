@@ -1,4 +1,5 @@
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/dto/auth_credential_dto.dart';
 import 'package:adhd_app/shared/services/firebase/firebase_auth_listenable.dart';
 import 'package:adhd_app/shared/utils/exceptions/app/app_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
@@ -15,7 +16,7 @@ class FirebaseAuthService implements AuthService {
 
   static final _logger = Logger(location: "FirebaseAuthService");
   @override
-  Future<Result<UserCredential, BaseException>>
+  Future<Result<AuthCredentialDto, BaseException>>
   createAccountWithEmailAndPassword({
     required String email,
     required String password,
@@ -23,9 +24,9 @@ class FirebaseAuthService implements AuthService {
     try {
       final UserCredential credential = await _instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return Ok(credential);
+      return Ok(dtoFromUserCredential(credential));
     } on FirebaseAuthException catch (ex) {
-      return _handleAuthError<UserCredential>(ex);
+      return _handleAuthError<AuthCredentialDto>(ex);
     } catch (ex) {
       _logger.error(ex.toString());
       return Error(UnknownErrorException());
@@ -33,10 +34,10 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<Result<UserCredential, BaseException>> signInWithGoogle() async {
+  Future<Result<AuthCredentialDto, BaseException>> signInWithGoogle() async {
     try {
       final res = await _instance.signInWithProvider(GoogleAuthProvider());
-      return Ok(res);
+      return Ok(dtoFromUserCredential(res));
     } on FirebaseAuthException catch (ex) {
       return _handleAuthError(ex);
     } catch (ex) {
@@ -46,7 +47,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<Result<UserCredential, BaseException>> signInWithEmailAndPassword({
+  Future<Result<AuthCredentialDto, BaseException>> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -56,9 +57,9 @@ class FirebaseAuthService implements AuthService {
         password: password,
       );
 
-      return Ok(authResult);
+      return Ok(dtoFromUserCredential(authResult));
     } on FirebaseAuthException catch (ex) {
-      return _handleAuthError<UserCredential>(ex);
+      return _handleAuthError<AuthCredentialDto>(ex);
     } on Exception catch (ex) {
       _logger.error("${UnknownErrorException().message}: ${ex.toString()}");
       return Error(UnknownErrorException());
@@ -138,5 +139,12 @@ class FirebaseAuthService implements AuthService {
         _logger.error("${GenericAuthException().message}: ${ex.toString()}");
         return Error(GenericAuthException());
     }
+  }
+
+  AuthCredentialDto dtoFromUserCredential(UserCredential userCredential) {
+    return AuthCredentialDto(
+      uid: userCredential.user?.uid,
+      email: userCredential.user?.email,
+    );
   }
 }

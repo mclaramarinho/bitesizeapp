@@ -18,13 +18,24 @@ Future<void> main() async {
   configureDependencies();
 
   /// Load env variables
-  await getIt.get<EnvService>().load();
+  bool isEnvLoaded = false;
+  (await getIt.get<EnvService>().load()).when(
+    ok: (_) => isEnvLoaded = true,
+    error: (_) {},
+  );
+  if (!isEnvLoaded) return;
 
   /// Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseInitializer.init();
 
-  getIt.get<DatabaseService>().init();
+  bool isDbInit = false;
+  getIt.get<DatabaseService>().init().when(
+    ok: (_) => isDbInit = true,
+    error: (_) {},
+  );
+
+  if (!isDbInit) return;
 
   runApp(const MyApp());
 }

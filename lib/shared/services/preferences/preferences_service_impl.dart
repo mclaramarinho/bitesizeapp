@@ -1,6 +1,9 @@
 import 'package:adhd_app/shared/services/preferences/preferences_service.dart';
+import 'package:adhd_app/shared/utils/exceptions/app/app_exception.dart';
+import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/preferences/preferences_exception.dart';
 import 'package:adhd_app/shared/utils/logger/logger.dart';
+import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +18,7 @@ class PreferencesServiceImpl implements PreferencesService {
   static const Logger _logger = Logger(location: "PreferencesServiceImpl");
 
   @override
-  Future<void> set<T>(String key, T value) async {
+  Future<Result<void, BaseException>> set<T>(String key, T value) async {
     try {
       if (T is bool) {
         await _instance!.setBool(key, value as bool);
@@ -26,47 +29,69 @@ class PreferencesServiceImpl implements PreferencesService {
       } else if (T is String) {
         await _instance!.setString(key, value as String);
       } else {
-        throw UnsupportedPreferenceType();
+        return Error(UnsupportedPreferenceType());
       }
+
+      return Ok(null);
     } catch (ex) {
       if (ex is TypeError) {
-        throw IncorrectPreferenceType();
+        return Error(IncorrectPreferenceType());
       } else {
-        _logger.error("Unexpected error", includeStackTrace: true);
-        rethrow;
+        _logger.error(
+          "Unexpected error",
+          includeStackTrace: true,
+          additionalInfo: ex,
+        );
+        return Error(UnknownErrorException());
       }
     }
   }
 
   @override
-  Future<T> get<T>(String key) async {
+  Future<Result<T, BaseException>> get<T>(String key) async {
     try {
       _ensureInstanceInitiated();
+      T val;
       if (T is bool) {
-        return await _instance!.getBool(key) as T;
+        val = await _instance!.getBool(key) as T;
       } else if (T is double) {
-        return await _instance!.getDouble(key) as T;
+        val = await _instance!.getDouble(key) as T;
       } else if (T is int) {
-        return await _instance!.getInt(key) as T;
+        val = await _instance!.getInt(key) as T;
       } else if (T is String) {
-        return await _instance!.getString(key) as T;
+        val = await _instance!.getString(key) as T;
       } else {
-        throw UnsupportedPreferenceType();
+        return Error(UnsupportedPreferenceType());
       }
+      return Ok(val);
     } catch (ex) {
       if (ex is TypeError) {
-        throw IncorrectPreferenceType();
+        return Error(IncorrectPreferenceType());
       } else {
-        _logger.error("Unexpected error", includeStackTrace: true);
-        rethrow;
+        _logger.error(
+          "Unexpected error",
+          includeStackTrace: true,
+          additionalInfo: ex,
+        );
+        return Error(UnknownErrorException());
       }
     }
   }
 
   @override
-  Future<void> clear(String key) async {
+  Future<Result<void, BaseException>> clear(String key) async {
     _ensureInstanceInitiated();
-    return await _instance!.clear();
+    try {
+      await _instance!.clear();
+      return Ok(null);
+    } catch (ex) {
+      _logger.error(
+        "Unexpected error",
+        includeStackTrace: true,
+        additionalInfo: ex,
+      );
+      return Error(UnknownErrorException());
+    }
   }
 
   bool _ensureInstanceInitiated() {

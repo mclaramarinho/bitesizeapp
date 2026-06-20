@@ -7,7 +7,7 @@ class CreateAccountFormEntity extends Equatable {
   final String? name;
   final DateTime? birthdate;
   final String? country;
-  final String? firebaseUserUid;
+  final String? userUid;
 
   const CreateAccountFormEntity({
     this.email,
@@ -16,7 +16,7 @@ class CreateAccountFormEntity extends Equatable {
     this.name,
     this.birthdate,
     this.country,
-    this.firebaseUserUid,
+    this.userUid,
   });
 
   CreateAccountFormEntity copyWith({
@@ -26,7 +26,7 @@ class CreateAccountFormEntity extends Equatable {
     String? name,
     DateTime? birthdate,
     String? country,
-    String? firebaseUserUid,
+    String? userUid,
   }) {
     return CreateAccountFormEntity(
       email: email ?? this.email,
@@ -35,7 +35,7 @@ class CreateAccountFormEntity extends Equatable {
       name: name ?? this.name,
       birthdate: birthdate ?? this.birthdate,
       country: country ?? this.country,
-      firebaseUserUid: firebaseUserUid ?? this.firebaseUserUid,
+      userUid: userUid ?? this.userUid,
     );
   }
 
@@ -47,6 +47,6 @@ class CreateAccountFormEntity extends Equatable {
     name,
     birthdate,
     country,
-    firebaseUserUid,
+    userUid,
   ];
 }

@@ -93,7 +93,7 @@ class SignInCubit extends Cubit<SignInState> {
     );
 
     signInResult.when(
-      ok: (val) {
+      ok: (_) {
         emit(SignInStateSuccess());
       },
       error: (ex) {
@@ -128,7 +128,7 @@ class SignInCubit extends Cubit<SignInState> {
     );
 
     sendResult.when(
-      ok: (val) => emit(SignInStateRecoveryEmailSent()),
+      ok: (_) => emit(SignInStateRecoveryEmailSent()),
       error: (ex) {
         emitStateSafelly<SignInStateLoaded>(
           (st) => emit(

@@ -1,5 +1,6 @@
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/dto/auth_credential_dto.dart';
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/extensions/cubit.dart';
@@ -8,7 +9,6 @@ import 'package:adhd_app/shared/utils/l10n/app_localizations.dart';
 import 'package:adhd_app/shared/utils/logger/logger.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'create_account_state.dart';
@@ -41,7 +41,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     final [validEmail, validPassword] = canCreateAccount;
 
-    final Result<UserCredential, BaseException> createResult =
+    final Result<AuthCredentialDto, BaseException> createResult =
         await _authService.createAccountWithEmailAndPassword(
           email: validEmail.trim(),
           password: validPassword,
@@ -49,16 +49,14 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     createResult.when(
       ok: (userCredential) {
-        _logger.info(
-          'Account created successfully: ${userCredential.user?.email}',
-        );
+        _logger.info('Account created successfully: ${userCredential.email}');
         // TODO - create profile on the database
         emitStateSafelly<CreateAccountStateLoaded>(
           (cs) => emit(
             cs.copyWith(
               form: cs.form.copyWith(
-                email: userCredential.user?.email,
-                firebaseUserUid: userCredential.user?.uid,
+                email: userCredential.email,
+                userUid: userCredential.uid,
               ),
               showFormErrorMessage: false,
             ),
@@ -76,7 +74,7 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
   Future<void> createWithGoogle() async {
     final createResult = await _authService.signInWithGoogle();
     createResult.when(
-      ok: (val) {
+      ok: (_) {
         // TODO - create profile on the database
         emit(CreateAccountStateSuccess());
       },
