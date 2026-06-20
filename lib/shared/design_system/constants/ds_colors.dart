@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class DsColors {
   static const Blue blue = Blue();
   static const Green green = Green();
@@ -33,6 +34,7 @@ class Green extends DsColor {
   Color get veryDark => Color(0xFF00381A);
   Color get mutedMint => Color(0xFF007A4F);
   Color get toxic => Color(0xFF39FF14);
+  Color get success => Color(0xFF22C55E);
 }
 
 class Red extends DsColor {
@@ -41,6 +43,7 @@ class Red extends DsColor {
   Color get veryDark => Color(0xFFB00020);
   Color get critical => Color(0xFFFF0055);
   Color get red => Color(0xFFE53935);
+  Color get error => Color(0xFFEF4444);
 }
 
 class White extends DsColor {
@@ -70,6 +73,7 @@ class Yellow extends DsColor {
   const Yellow() : super();
   Color get gold => Color(0xFFFFB800);
   Color get veryDark => Color(0xFF3D2B00);
+  Color get warning => Color(0xFFF59E0B);
 }
 
 class Pink extends DsColor {

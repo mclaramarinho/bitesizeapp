@@ -2,9 +2,12 @@ import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/firebase/firebase_initializer.dart'
     as FirebaseInitializer;
+import 'package:adhd_app/shared/services/db/database_service.dart';
 import 'package:adhd_app/shared/services/env/env_service.dart';
+import 'package:adhd_app/shared/services/providers/toast/toast_cubit.dart';
 import 'package:adhd_app/shared/services/providers/dialog/dialog_cubit.dart';
 import 'package:adhd_app/shared/services/providers/dialog/dialog_manager.dart';
+import 'package:adhd_app/shared/services/providers/toast/toast_manager.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +24,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseInitializer.init();
 
+  getIt.get<DatabaseService>().init();
+
   runApp(const MyApp());
 }
 
@@ -30,7 +35,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => getIt.get<DialogCubit>())],
+      providers: [
+        BlocProvider(create: (_) => getIt.get<DialogCubit>()),
+        BlocProvider(create: (_) => getIt.get<ToastCubit>()..listen()),
+      ],
       child: MaterialApp.router(
         theme: DsThemes.freeDark,
         localizationsDelegates: const [
@@ -41,7 +49,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [Locale('en')],
         routerConfig: getIt.get<AppRouter>().router,
         builder: (context, child) {
-          return DialogManager(child: child!);
+          return ToastManager(child: DialogManager(child: child!));
         },
       ),
     );
