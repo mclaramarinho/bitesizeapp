@@ -6,6 +6,7 @@ import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_divider/ds_divider.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
@@ -78,7 +79,7 @@ class _CreateAccountPageContentState extends State<_CreateAccountPageContent> {
             if (state is CreateAccountStateLoaded &&
                 state.showFormErrorMessage &&
                 state.formErrorMessage != null) ...[
-              Text(state.formErrorMessage!),
+              DsText(state.formErrorMessage!),
             ],
 
             CreateAccountWithEmailPasswordForm(),

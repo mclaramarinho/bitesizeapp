@@ -2,6 +2,7 @@ import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_cubit.
 import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_state.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
@@ -51,7 +52,7 @@ class _PasswordRecoveryDialogContentState
           children: [
             if (hasError &&
                 (loadedState?.recoveryDialogErrorMessage?.isNotEmpty ?? false))
-              Text(loadedState!.recoveryDialogErrorMessage!),
+              DsText(loadedState!.recoveryDialogErrorMessage!),
 
             Form(
               key: _recoveryFormKey,

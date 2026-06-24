@@ -2,6 +2,7 @@ import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
@@ -15,13 +16,10 @@ class PasswordRecoveryPage extends StatelessWidget {
     return DsScaffold(
       defaultSpacing: DsSpacing.md,
       children: [
-        Text(
-          "Check your email!",
-          style: DsThemes.currentTextTheme.headlineLarge,
-        ),
-        Text(
+        DsText("Check your email!", level: DsTextLevel.headerLarge),
+        DsText(
           "If an account is linked to that email, you will receive a link to reset your password.",
-          style: DsThemes.currentTextTheme.bodyLarge,
+          level: DsTextLevel.bodyLarge,
         ),
         // TODO (implement)
         Container(

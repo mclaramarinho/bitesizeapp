@@ -1,4 +1,5 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:flutter/material.dart';
 
 // TODO (docs)
@@ -25,7 +26,7 @@ class DsScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavBar,
         appBar:
             appBar ??
-            (pageTitle != null ? AppBar(title: Text(pageTitle!)) : null),
+            (pageTitle != null ? AppBar(title: DsText(pageTitle!)) : null),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(DsSpacing.md),
           child: Column(

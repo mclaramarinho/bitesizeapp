@@ -1,5 +1,6 @@
 import 'package:adhd_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:adhd_app/features/home/presentation/cubit/home_state.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ class _HomePageContentState extends State<_HomePageContent> {
             if (state is HomeStateInitial) ...[CircularProgressIndicator()],
 
             if (state is HomeStateLoaded) ...[
-              Text("Home page for user: ${state.user!.email}"),
+              DsText("Home page for user: ${state.user!.email}"),
             ],
           ],
         );

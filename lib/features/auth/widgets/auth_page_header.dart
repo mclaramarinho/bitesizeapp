@@ -1,5 +1,5 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
-import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
@@ -30,15 +30,9 @@ class AuthPageHeader extends StatelessWidget {
 
     return Column(
       children: [
-        Text(
-          pageTitle ?? loc.app_name,
-          style: DsThemes.current.textTheme.headlineLarge,
-        ),
+        DsText(pageTitle ?? loc.app_name, level: DsTextLevel.headerLarge),
         SizedBox(height: DsSpacing.sm),
-        Text(
-          loc.auth_header_subtitle,
-          style: DsThemes.current.textTheme.headlineMedium,
-        ),
+        DsText(loc.auth_header_subtitle, level: DsTextLevel.headerMedium),
       ],
     );
   }
