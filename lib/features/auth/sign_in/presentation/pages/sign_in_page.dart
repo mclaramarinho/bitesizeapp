@@ -5,6 +5,7 @@ import 'package:adhd_app/features/auth/widgets/auth_page_header.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_button.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/services/providers/dialog/dialog_cubit.dart';
@@ -95,7 +96,7 @@ class _SignInPageContentState extends State<_SignInPageContent> {
             if (state is SignInStateLoaded &&
                 state.showError &&
                 state.errorMessage != null) ...[
-              Text(state.errorMessage!),
+              DsText(state.errorMessage!),
             ],
             Form(
               key: _formKey,

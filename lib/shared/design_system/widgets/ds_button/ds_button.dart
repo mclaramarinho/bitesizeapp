@@ -1,5 +1,6 @@
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_button/ds_loadable_button.dart/ds_loadable_button.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -29,12 +30,12 @@ class DsButton {
     TextAlign? textAlign,
   }) {
     return Center(
-      child: Text(
+      child: DsText(
         label,
-        textAlign: textAlign ?? TextAlign.left,
-        style: DsThemes.current.textTheme.bodyLarge!.copyWith(
-          decoration: TextDecoration.underline,
+        customTextStyle: CustomTextStyle(
+          isUnderlined: true,
           color: color,
+          textAlign: textAlign ?? TextAlign.left,
         ),
       ).onTap(onPressed),
     );

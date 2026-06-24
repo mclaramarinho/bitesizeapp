@@ -1,4 +1,5 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/utils/extensions/context_or_null.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class DsDivider {
         Expanded(child: Divider()),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: DsSpacing.sm),
-          child: Text(context.loc.or),
+          child: DsText(context.loc.or),
         ),
         Expanded(child: Divider()),
       ],

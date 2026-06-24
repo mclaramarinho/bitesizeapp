@@ -1,6 +1,7 @@
 import 'package:adhd_app/shared/design_system/constants/ds_colors.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/services/providers/toast/toast_cubit.dart';
 import 'package:adhd_app/shared/services/providers/toast/toast_state.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _ToastManagerState extends State<ToastManager> {
               spacing: DsSpacing.md,
               children: [
                 Icon(data.toastType.icon),
-                Text(data.message, style: DsThemes.current.textTheme.bodyLarge),
+                DsText(data.message, level: DsTextLevel.bodyLarge),
               ],
             ),
             backgroundColor: data.toastType.color,

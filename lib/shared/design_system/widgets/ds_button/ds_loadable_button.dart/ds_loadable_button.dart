@@ -1,5 +1,6 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -63,9 +64,9 @@ class _DSLoadableButtonState extends State<DSLoadableButton> {
       ),
       onPressed: onPressedCallback,
       icon: _loading ? loadingIndicator : prefixIconWidget,
-      label: Text(
+      label: DsText(
         _loading ? widget.loadingLabel : widget.label,
-        textAlign: TextAlign.center,
+        customTextStyle: CustomTextStyle(textAlign: TextAlign.center),
       ),
     );
   }

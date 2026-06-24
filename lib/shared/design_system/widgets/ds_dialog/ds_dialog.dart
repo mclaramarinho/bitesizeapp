@@ -1,5 +1,6 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +30,10 @@ class DsDialog {
               runSpacing: DsSpacing.lg,
               children: [
                 if (title != null) ...[
-                  Text(title, style: DsThemes.currentTextTheme.headlineMedium),
+                  DsText(title, level: DsTextLevel.headerMedium),
                 ],
                 if (subtitle != null) ...[
-                  Text(subtitle, style: DsThemes.currentTextTheme.bodyMedium),
+                  DsText(subtitle, level: DsTextLevel.bodyMedium),
                 ],
                 Builder(builder: bodyBuilder),
               ],
