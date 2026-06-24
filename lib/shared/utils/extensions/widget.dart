@@ -6,6 +6,10 @@ extension ExtWidget on Widget {
   Widget onTap(GestureTapCallback callback) {
     return GestureDetector(onTap: callback, child: this);
   }
+
+  Widget tooltip(String value) {
+    return Tooltip(message: value, child: this);
+  }
 }
 
 extension ExtTextSpan on TextSpan {

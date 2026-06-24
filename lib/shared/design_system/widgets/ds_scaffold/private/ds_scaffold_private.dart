@@ -1,6 +1,8 @@
+import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_bottom_navbar/ds_bottom_navbar.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/di/injection.dart';
+import 'package:adhd_app/shared/utils/extensions/widget.dart';
 import 'package:adhd_app/shared/utils/navigation/router.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +18,31 @@ class DsScaffoldPrivate extends StatefulWidget {
 }
 
 class _DsScaffoldPrivateState extends State<DsScaffoldPrivate> {
+  final showMenuRoutes = [AppRoutes.profile];
+
   @override
   Widget build(BuildContext context) {
     return DsScaffold(
-      bottomNavBar: DsBottomNavbar(items: bottomNavbarItems),
+      appBar: showMenuRoutes.contains(getIt.get<AppRouter>().matchedLocation)
+          ? AppBar(
+              actionsPadding: EdgeInsets.symmetric(
+                vertical: DsSpacing.sm,
+                horizontal: DsSpacing.md,
+              ),
+              automaticallyImplyLeading: false,
+              actions: [
+                Icon(Icons.menu).tooltip("menu").onTap(() => print("menu")),
+              ],
+            )
+          : null,
+      bottomNavBar: DsBottomNavbar(items: _bottomNavbarItems),
       children: [widget.navShell],
     );
   }
 }
 
 // TODO (localize)
-final bottomNavbarItems = [
+final _bottomNavbarItems = [
   BottomNavbarItem(
     icon: Icons.query_builder,
     tooltip: "Parking Lot",
