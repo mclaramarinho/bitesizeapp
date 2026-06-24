@@ -1,6 +1,5 @@
 import 'package:adhd_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:adhd_app/features/home/presentation/cubit/home_state.dart';
-import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_scaffold.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +30,7 @@ class _HomePageContentState extends State<_HomePageContent> {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return DsScaffold(
+        return Column(
           children: [
             if (state is HomeStateInitial) ...[CircularProgressIndicator()],
 

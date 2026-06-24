@@ -26,7 +26,12 @@ class AppRouter {
   AppRoutes get matchedLocation =>
       AppRoutes.fromPath(_router.state.matchedLocation);
 
-  void push(AppRoutes route) async {
+  void push(AppRoutes route) {
+    _router.go(route.path);
+  }
+
+  void pushIfDifferentRoute(AppRoutes route) {
+    if (matchedLocation == route) return;
     _router.go(route.path);
   }
 
