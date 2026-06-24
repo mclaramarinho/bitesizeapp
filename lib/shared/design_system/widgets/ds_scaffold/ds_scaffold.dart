@@ -9,6 +9,7 @@ class DsScaffold extends StatelessWidget {
   final String? pageTitle;
   final double? defaultSpacing;
   final Widget? bottomNavBar;
+  final FabData? fabData;
 
   const DsScaffold({
     required this.children,
@@ -16,6 +17,7 @@ class DsScaffold extends StatelessWidget {
     this.pageTitle,
     this.defaultSpacing,
     this.bottomNavBar,
+    this.fabData,
     super.key,
   });
 
@@ -24,6 +26,15 @@ class DsScaffold extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: bottomNavBar,
+        floatingActionButton: fabData != null
+            ? FloatingActionButton(
+                onPressed: () {
+                  fabData!.onTap();
+                },
+                shape: CircleBorder(),
+                child: Icon(fabData!.icon),
+              )
+            : null,
         appBar:
             appBar ??
             (pageTitle != null ? AppBar(title: DsText(pageTitle!)) : null),
@@ -38,4 +49,11 @@ class DsScaffold extends StatelessWidget {
       ),
     );
   }
+}
+
+class FabData {
+  final VoidCallback onTap;
+  final IconData icon;
+
+  const FabData({required this.onTap, this.icon = Icons.add});
 }

@@ -20,10 +20,16 @@ class DsScaffoldPrivate extends StatefulWidget {
 class _DsScaffoldPrivateState extends State<DsScaffoldPrivate> {
   final showMenuRoutes = [AppRoutes.profile];
 
+  final floatingActionButtonRoutes = {
+    AppRoutes.home: FabData(onTap: () => print("tapped fab at HOME")),
+  };
+
   @override
   Widget build(BuildContext context) {
+    final router = getIt.get<AppRouter>();
+    final currentRoute = router.matchedLocation;
     return DsScaffold(
-      appBar: showMenuRoutes.contains(getIt.get<AppRouter>().matchedLocation)
+      appBar: showMenuRoutes.contains(currentRoute)
           ? AppBar(
               actionsPadding: EdgeInsets.symmetric(
                 vertical: DsSpacing.sm,
@@ -35,6 +41,7 @@ class _DsScaffoldPrivateState extends State<DsScaffoldPrivate> {
               ],
             )
           : null,
+      fabData: floatingActionButtonRoutes[currentRoute],
       bottomNavBar: DsBottomNavbar(items: _bottomNavbarItems),
       children: [widget.navShell],
     );
