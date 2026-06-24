@@ -19,26 +19,30 @@ class _DsScaffoldPrivateState extends State<DsScaffoldPrivate> {
   @override
   Widget build(BuildContext context) {
     return DsScaffold(
-      bottomNavBar: DsBottomNavbar(
-        currentSelection: widget.navShell.currentIndex,
-        items: bottomNavbarItems,
-      ),
+      bottomNavBar: DsBottomNavbar(items: bottomNavbarItems),
       children: [widget.navShell],
     );
   }
 }
 
+// TODO (localize)
 final bottomNavbarItems = [
+  BottomNavbarItem(
+    icon: Icons.query_builder,
+    tooltip: "Parking Lot",
+    onTap: () => print("Parking Lot"),
+    route: AppRoutes.signIn, // TODO (fix)
+  ),
   BottomNavbarItem(
     icon: Icons.home,
     tooltip: "Home",
     onTap: () => getIt.get<AppRouter>().pushIfDifferentRoute(AppRoutes.home),
-    index: 0,
+    route: AppRoutes.home,
   ),
   BottomNavbarItem(
     icon: Icons.person,
     tooltip: "Profile",
     onTap: () => getIt.get<AppRouter>().pushIfDifferentRoute(AppRoutes.profile),
-    index: 1,
+    route: AppRoutes.profile,
   ),
 ];
