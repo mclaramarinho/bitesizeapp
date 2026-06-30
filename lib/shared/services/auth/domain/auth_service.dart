@@ -1,5 +1,5 @@
-import 'package:adhd_app/shared/services/auth/dto/auth_credential_dto.dart';
-import 'package:adhd_app/shared/services/firebase/firebase_auth_listenable.dart';
+import 'package:adhd_app/shared/services/auth/domain/dto/auth_credential_dto.dart';
+import 'package:adhd_app/shared/services/auth/infra/firebase_auth_listenable.dart';
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';

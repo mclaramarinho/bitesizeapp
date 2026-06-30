@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:adhd_app/shared/services/db/app_db_collections_enum.dart';
+import 'package:adhd_app/shared/services/db/domain/app_db_collections_enum.dart';
 import 'package:adhd_app/shared/utils/exceptions/db/db_exception.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 

@@ -1,4 +1,4 @@
-import 'package:adhd_app/shared/services/preferences/preferences_service.dart';
+import 'package:adhd_app/shared/services/preferences/domain/preferences_service.dart';
 import 'package:adhd_app/shared/utils/exceptions/app/app_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/preferences/preferences_exception.dart';

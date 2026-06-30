@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/domain/auth_service.dart';
 import 'package:adhd_app/shared/utils/navigation/global.dart';
 import 'package:adhd_app/shared/utils/navigation/routes.dart';
 import 'package:flutter/material.dart';
