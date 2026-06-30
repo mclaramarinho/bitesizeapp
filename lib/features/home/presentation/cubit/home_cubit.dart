@@ -1,5 +1,5 @@
 import 'package:adhd_app/features/home/presentation/cubit/home_state.dart';
-import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/domain/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

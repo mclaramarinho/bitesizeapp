@@ -1,6 +1,6 @@
 import 'package:adhd_app/features/auth/sign_in/domain/entities/sign_in_form_entity.dart';
 import 'package:adhd_app/features/auth/sign_in/presentation/cubit/sign_in_state.dart';
-import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/domain/auth_service.dart';
 import 'package:adhd_app/shared/utils/extensions/cubit.dart';
 import 'package:adhd_app/shared/utils/extensions/string.dart';
 import 'package:adhd_app/shared/utils/validators/input_validation.dart';

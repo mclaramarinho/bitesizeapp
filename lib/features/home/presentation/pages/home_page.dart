@@ -36,6 +36,7 @@ class _HomePageContentState extends State<_HomePageContent> {
             if (state is HomeStateInitial) ...[CircularProgressIndicator()],
 
             if (state is HomeStateLoaded) ...[
+              DsText("Welcome", level: DsTextLevel.headerLarge),
               DsText("Home page for user: ${state.user!.email}"),
             ],
           ],

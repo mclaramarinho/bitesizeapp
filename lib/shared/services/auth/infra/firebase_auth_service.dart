@@ -1,6 +1,6 @@
-import 'package:adhd_app/shared/services/auth/auth_service.dart';
-import 'package:adhd_app/shared/services/auth/dto/auth_credential_dto.dart';
-import 'package:adhd_app/shared/services/firebase/firebase_auth_listenable.dart';
+import 'package:adhd_app/shared/services/auth/domain/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/domain/dto/auth_credential_dto.dart';
+import 'package:adhd_app/shared/services/auth/infra/firebase_auth_listenable.dart';
 import 'package:adhd_app/shared/utils/exceptions/app/app_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/auth/auth_exceptions.dart';
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';

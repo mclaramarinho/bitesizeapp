@@ -1,4 +1,4 @@
-import 'package:adhd_app/shared/services/network/connectivity_service.dart';
+import 'package:adhd_app/shared/services/network/connectivity/domain/connectivity_service.dart';
 import 'package:adhd_app/shared/services/providers/toast/toast_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

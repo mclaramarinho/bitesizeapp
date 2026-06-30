@@ -2,8 +2,8 @@ import 'package:adhd_app/shared/design_system/constants/ds_themes.dart';
 import 'package:adhd_app/shared/di/injection.dart';
 import 'package:adhd_app/shared/firebase/firebase_initializer.dart'
     as FirebaseInitializer;
-import 'package:adhd_app/shared/services/db/database_service.dart';
-import 'package:adhd_app/shared/services/env/env_service.dart';
+import 'package:adhd_app/shared/services/db/domain/database_service.dart';
+import 'package:adhd_app/shared/services/env/domain/env_service.dart';
 import 'package:adhd_app/shared/services/providers/toast/toast_cubit.dart';
 import 'package:adhd_app/shared/services/providers/dialog/dialog_cubit.dart';
 import 'package:adhd_app/shared/services/providers/dialog/dialog_manager.dart';

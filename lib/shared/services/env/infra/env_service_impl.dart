@@ -1,3 +1,4 @@
+import 'package:adhd_app/shared/services/env/domain/env_service.dart';
 import 'package:adhd_app/shared/utils/exceptions/app/app_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/base_exception.dart';
 import 'package:adhd_app/shared/utils/exceptions/env/env_exception.dart';
@@ -5,11 +6,6 @@ import 'package:adhd_app/shared/utils/logger/logger.dart';
 import 'package:adhd_app/shared/utils/result/result.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
-
-abstract class EnvService {
-  Future<Result<void, Exception>> load();
-  Result<String?, BaseException> get(String key);
-}
 
 // TODO (docs)
 @Injectable(as: EnvService)

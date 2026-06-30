@@ -1,5 +1,5 @@
 import 'package:adhd_app/shared/di/injection.dart';
-import 'package:adhd_app/shared/services/auth/auth_service.dart';
+import 'package:adhd_app/shared/services/auth/domain/auth_service.dart';
 
 // TODO (docs)
 enum AppDbCollections {
