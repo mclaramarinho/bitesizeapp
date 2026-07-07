@@ -3,7 +3,9 @@ import 'package:adhd_app/features/auth/password_recovery/presentation/pages/pass
 import 'package:adhd_app/features/auth/sign_in/presentation/pages/sign_in_page.dart';
 import 'package:adhd_app/features/home/presentation/pages/home_page.dart';
 import 'package:adhd_app/features/profile/profile/presentation/pages/profile_page.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_fab/ds_fab.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/private/ds_scaffold_private.dart';
+import 'package:adhd_app/shared/utils/enums/fab.dart';
 import 'package:adhd_app/shared/utils/exceptions/navigation/navigation_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +32,8 @@ enum AppRoutes {
   GoRoute toGoRoute() {
     return GoRoute(path: path, builder: (context, state) => getPageWidget);
   }
+
+  FabData? get fabData => appFabRegistry[this];
 
   Widget get getPageWidget {
     switch (this) {

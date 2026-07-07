@@ -20,10 +20,6 @@ class DsScaffoldPrivate extends StatefulWidget {
 class _DsScaffoldPrivateState extends State<DsScaffoldPrivate> {
   final showMenuRoutes = [AppRoutes.profile];
 
-  final floatingActionButtonRoutes = {
-    AppRoutes.home: FabData(onTap: () => print("tapped fab at HOME")),
-  };
-
   @override
   Widget build(BuildContext context) {
     final router = getIt.get<AppRouter>();
@@ -41,7 +37,7 @@ class _DsScaffoldPrivateState extends State<DsScaffoldPrivate> {
               ],
             )
           : null,
-      fabData: floatingActionButtonRoutes[currentRoute],
+      fabData: currentRoute.fabData,
       bottomNavBar: DsBottomNavbar(items: _bottomNavbarItems),
       children: [widget.navShell],
     );

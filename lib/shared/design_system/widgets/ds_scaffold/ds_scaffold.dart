@@ -1,4 +1,5 @@
 import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_scaffold/ds_fab/ds_fab.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:flutter/material.dart';
 
@@ -26,15 +27,7 @@ class DsScaffold extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: bottomNavBar,
-        floatingActionButton: fabData != null
-            ? FloatingActionButton(
-                onPressed: () {
-                  fabData!.onTap();
-                },
-                shape: CircleBorder(),
-                child: Icon(fabData!.icon),
-              )
-            : null,
+        floatingActionButton: fabData != null ? DsFab(fabData: fabData!) : null,
         appBar:
             appBar ??
             (pageTitle != null ? AppBar(title: DsText(pageTitle!)) : null),
@@ -49,11 +42,4 @@ class DsScaffold extends StatelessWidget {
       ),
     );
   }
-}
-
-class FabData {
-  final VoidCallback onTap;
-  final IconData icon;
-
-  const FabData({required this.onTap, this.icon = Icons.add});
 }
