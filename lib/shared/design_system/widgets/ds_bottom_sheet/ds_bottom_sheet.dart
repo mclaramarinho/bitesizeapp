@@ -10,10 +10,12 @@ class DsBottomSheet {
     required Widget child,
     bool isDismissible = false,
     Color? backgroundColor,
+    bool isScrollControlled = true,
+    bool makeContentScrollable = false,
   }) {
     return showModalBottomSheet<T>(
       context: context ?? Navigator.of(getIt.get<AppRouter>().context!).context,
-      isScrollControlled: true,
+      isScrollControlled: isScrollControlled,
       backgroundColor: Colors.transparent,
       isDismissible: isDismissible,
       useSafeArea: true,
@@ -26,7 +28,9 @@ class DsBottomSheet {
             right: DsSpacing.md,
             bottom: MediaQuery.of(context).viewInsets.bottom + DsSpacing.md,
           ),
-          child: SingleChildScrollView(child: Column(children: [child])),
+          child: makeContentScrollable
+              ? SingleChildScrollView(child: Column(children: [child]))
+              : child,
         ),
       ),
     );

@@ -5,20 +5,24 @@ import 'package:flutter/material.dart';
 // TODO (docs)
 class DsTextInput extends StatefulWidget {
   const DsTextInput({
-    required this.label,
     required this.hint,
+    this.label,
     this.validator,
     this.isObscurable = false,
+    this.customSuffix,
+    this.onTapCustomSuffix,
     this.onChanged,
     this.initialValue,
     super.key,
   });
 
   final String? Function(String?)? validator;
-  final String label;
+  final String? label;
   final String hint;
   final bool? isObscurable;
+  final IconData? customSuffix;
   final void Function(String?)? onChanged;
+  final void Function(String?)? onTapCustomSuffix;
   final String? initialValue;
 
   @override
@@ -43,6 +47,11 @@ class _DsTextInputState extends State<DsTextInput> {
     return null;
   }
 
+  Widget get obscureIcon => Icon(
+    _isObscured ? Icons.visibility : Icons.visibility_off,
+    size: DsSpacing.lg,
+  ).onTap(() => setState(() => _isObscured = !_isObscured));
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -54,10 +63,11 @@ class _DsTextInputState extends State<DsTextInput> {
         labelText: widget.label,
         hintText: widget.hint,
         suffix: widget.isObscurable!
-            ? Icon(
-                _isObscured ? Icons.visibility : Icons.visibility_off,
-                size: DsSpacing.lg,
-              ).onTap(() => setState(() => _isObscured = !_isObscured))
+            ? obscureIcon
+            : widget.customSuffix != null
+            ? Icon(widget.customSuffix).onTap(
+                () => widget.onTapCustomSuffix?.call(_textController.text),
+              )
             : null,
       ),
       obscureText: widget.isObscurable == true ? _isObscured : false,

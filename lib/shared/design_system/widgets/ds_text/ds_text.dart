@@ -43,6 +43,7 @@ class CustomTextStyle {
 enum DsTextLevel {
   headerLarge,
   headerMedium,
+  headerSmall,
   bodyLarge,
   bodyMedium,
   bodySmall;
@@ -55,6 +56,8 @@ enum DsTextLevel {
         return theme.headlineLarge;
       case DsTextLevel.headerMedium:
         return theme.headlineMedium;
+      case DsTextLevel.headerSmall:
+        return theme.headlineSmall;
       case DsTextLevel.bodyLarge:
         return theme.bodyLarge;
       case DsTextLevel.bodyMedium:

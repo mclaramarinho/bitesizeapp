@@ -9,6 +9,7 @@ abstract class DsTypographyData {
   const DsTypographyData({
     required this.headlineLarge,
     required this.headlineMedium,
+    required this.headlineSmall,
     required this.bodyLarge,
     required this.bodyMedium,
     required this.bodySmall,
@@ -17,6 +18,7 @@ abstract class DsTypographyData {
 
   final TextStyle headlineLarge;
   final TextStyle headlineMedium;
+  final TextStyle headlineSmall;
   final TextStyle bodyLarge;
   final TextStyle bodyMedium;
   final TextStyle bodySmall;
@@ -25,6 +27,7 @@ abstract class DsTypographyData {
   TextTheme get theme => TextTheme(
     headlineLarge: headlineLarge,
     headlineMedium: headlineMedium,
+    headlineSmall: headlineSmall,
     bodyLarge: bodyLarge,
     bodyMedium: bodyMedium,
     bodySmall: bodySmall,
@@ -42,6 +45,11 @@ class DsTypographyDefault extends DsTypographyData {
         headlineMedium: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
+          letterSpacing: -0.2,
+        ),
+        headlineSmall: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
           letterSpacing: -0.2,
         ),
         bodyLarge: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
