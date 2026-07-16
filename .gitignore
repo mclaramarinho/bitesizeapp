@@ -51,5 +51,6 @@ lib/shared/di/injection.config.dart
 
 .env
 google-services.json
+GoogleService-Info.plist
 firebase.json
 pubspec.lock

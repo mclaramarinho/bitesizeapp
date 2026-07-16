@@ -51,15 +51,15 @@ enum DsTextLevel {
     final theme = DsThemes.current.textTheme;
 
     switch (this) {
-      case .headerLarge:
+      case DsTextLevel.headerLarge:
         return theme.headlineLarge;
-      case .headerMedium:
+      case DsTextLevel.headerMedium:
         return theme.headlineMedium;
-      case .bodyLarge:
+      case DsTextLevel.bodyLarge:
         return theme.bodyLarge;
-      case .bodyMedium:
+      case DsTextLevel.bodyMedium:
         return theme.bodyMedium;
-      case .bodySmall:
+      case DsTextLevel.bodySmall:
         return theme.bodySmall;
     }
   }
