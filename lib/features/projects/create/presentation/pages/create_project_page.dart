@@ -5,14 +5,15 @@ import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:flutter/material.dart';
 
 class CreateProjectPage extends StatelessWidget {
+  const CreateProjectPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
           Wrap(children: [DsText("Create Project")]),
-          // FIXED: Wrapped DsChat in Expanded so it occupies the rest of the screen
-          Expanded(child: DsChat(messages: messages)),
+          Expanded(child: DsChat(messages: messages, onSend: print,)),
         ],
       ),
     );
@@ -129,5 +130,11 @@ final messages = [
     messageId: "a12di001hni4=-21bu321n",
     responseOption: MessageResponseOption.singleChoice,
     isSenderLoggedUser: true,
+    responseOptions: [
+      MessageResponseOptionDataEntity(label: 'Option 1', id: "1"),
+      MessageResponseOptionDataEntity(label: 'Option 2', id: "2"),
+      MessageResponseOptionDataEntity(label: 'Option 3', id: "3"),
+      MessageResponseOptionDataEntity(label: 'Option 4', id: "4"),
+    ]
   ),
 ];

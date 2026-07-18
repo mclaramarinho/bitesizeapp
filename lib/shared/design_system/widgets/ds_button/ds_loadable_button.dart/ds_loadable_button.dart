@@ -11,6 +11,7 @@ class DSLoadableButton extends StatefulWidget {
   final String loadingLabel;
   final IconData? prefixIcon;
   final bool disabled;
+  final Color? backgroundColor;
 
   const DSLoadableButton({
     required this.onPressed,
@@ -18,6 +19,7 @@ class DSLoadableButton extends StatefulWidget {
     required this.loadingLabel,
     this.prefixIcon,
     this.disabled = false,
+    this.backgroundColor,
     super.key,
   });
   @override
@@ -61,6 +63,7 @@ class _DSLoadableButtonState extends State<DSLoadableButton> {
         padding: const EdgeInsets.symmetric(vertical: DsSpacing.md),
         elevation: DsSpacing.none,
         enableFeedback: !widget.disabled,
+        backgroundColor: widget.backgroundColor,
       ),
       onPressed: onPressedCallback,
       icon: _loading ? loadingIndicator : prefixIconWidget,

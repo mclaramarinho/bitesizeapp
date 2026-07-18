@@ -13,6 +13,7 @@ class DsButton {
     required String loadingLabel,
     IconData? prefixIcon,
     bool disabled = false,
+    Color? backgroundColor,
   }) {
     return DSLoadableButton(
       onPressed: onPressed,
@@ -20,6 +21,7 @@ class DsButton {
       loadingLabel: loadingLabel,
       prefixIcon: prefixIcon,
       disabled: disabled,
+      backgroundColor: backgroundColor,
     );
   }
 

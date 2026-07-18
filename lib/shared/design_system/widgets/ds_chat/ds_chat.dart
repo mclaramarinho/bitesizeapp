@@ -1,90 +1,92 @@
-import 'package:adhd_app/shared/design_system/constants/ds_spacing.dart';
-import 'package:adhd_app/shared/design_system/widgets/ds_chat/ds_message_bubble/ds_message_bubble.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_chat/ds_button_reply/ds_button_reply.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_chat/ds_message_list/ds_message_list.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_chat/entities/chat_message_entity.dart';
-import 'package:adhd_app/shared/design_system/widgets/ds_image/ds_image.dart';
+import 'package:adhd_app/shared/design_system/widgets/ds_chat/entities/message_response_option.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text/ds_text.dart';
 import 'package:adhd_app/shared/design_system/widgets/ds_text_input/ds_text_input.dart';
-import 'package:adhd_app/shared/utils/extensions/datetime.dart';
 import 'package:flutter/material.dart';
 
-class DsChat extends StatelessWidget {
+class DsChat extends StatefulWidget {
   final List<ChatMessageEntity> messages;
+  final void Function(String)? onSend;
+  final bool blockReplyOnSend;
 
-  const DsChat({Key? key, required this.messages}) : super(key: key);
+  const DsChat({
+    required this.messages,
+    this.onSend,
+    this.blockReplyOnSend = true,
+    super.key,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _DsChatState();
+}
+
+class _DsChatState extends State<DsChat> {
+  bool isReplyBlocked = true;
+  bool hasRepliedLast = false;
+
+  late ChatMessageEntity? lastMessage = widget.messages.lastOrNull;
+  late MessageResponseOption? responseType = lastMessage?.responseOption;
+  late List<MessageResponseOptionDataEntity>? options =
+      lastMessage?.responseOptions;
+
+  @override
+  void initState() {
+    super.initState();
+
+    lastMessage = widget.messages.lastOrNull;
+    responseType = lastMessage?.responseOption;
+    options = lastMessage?.responseOptions;
+
+    if (responseType != .none) {
+      isReplyBlocked = false;
+    }
+  }
+
+  void onReply(String? val) {
+    if (val == null) return;
+
+    widget.onSend?.call(val);
+
+    setState(() {
+      hasRepliedLast = true;
+      isReplyBlocked = true;
+    });
+  }
+
+  Widget getResponseWidget() {
+    if (lastMessage == null || responseType == .none || isReplyBlocked) {
+      return DsText("Sorry :( You can't reply just yet", level: .bodyLarge);
+    }
+
+    if (lastMessage!.isChatEnded) {
+      return DsText("This chat has ended", level: .bodyLarge);
+    }
+
+    switch (responseType) {
+      case .text:
+        return DsTextInput(
+          hint: "Enter your message here",
+          customSuffix: Icons.send,
+          onTapCustomSuffix: onReply,
+        );
+
+      case .singleChoice:
+        return DsButtonReply(options: options!, onTap: onReply);
+
+      default:
+        return DsText("This reply option is still not available");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final lastMessage = messages.lastOrNull;
-    final responseType = lastMessage?.responseOption;
     return Column(
       children: [
-        Expanded(
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(vertical: DsSpacing.sm),
-            physics: const BouncingScrollPhysics(),
-            itemCount: messages.length,
-            itemBuilder: (context, index) {
-              final message = messages[index];
-              final isMe = message.isSenderLoggedUser;
+        DsMessageList(messages: widget.messages),
 
-              final image = SizedBox(
-                width: 40,
-                height: 40,
-                child: ClipOval(
-                  child: DsImage(
-                    sourceType: ImageSourceType.base64,
-                    source: message.senderPicture,
-                  ),
-                ),
-              );
-
-              return ListTile(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: DsSpacing.sm,
-                  horizontal: DsSpacing.sm,
-                ),
-                leading: isMe ? null : image,
-                trailing: !isMe ? null : image,
-                title: DsText(
-                  message.senderName,
-                  level: DsTextLevel.headerSmall,
-                  customTextStyle: CustomTextStyle(
-                    textAlign: isMe ? TextAlign.end : TextAlign.start,
-                  ),
-                ),
-                subtitle: Wrap(
-                  direction: Axis.vertical,
-                  crossAxisAlignment: isMe
-                      ? WrapCrossAlignment.end
-                      : WrapCrossAlignment.start,
-                  runAlignment: isMe ? WrapAlignment.end : WrapAlignment.start,
-                  spacing: DsSpacing.sm,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: DsSpacing.sm),
-                      child: DsMessageBubble(message: message),
-                    ),
-                    DsText(message.timestamp.toDateTimeString()),
-                  ],
-                ),
-                isThreeLine: true,
-              );
-            },
-          ),
-        ),
-
-        if (responseType == .none)
-          if (!lastMessage!.isChatEnded)
-            DsText("Sorry :( You can't reply just yet", level: .bodyLarge),
-        if (lastMessage!.isChatEnded)
-          DsText("This chat has ended", level: .bodyLarge),
-
-        if (responseType == .text)
-          DsTextInput(
-            hint: "Enter your message here",
-            customSuffix: Icons.send,
-            onTapCustomSuffix: print,
-          ),
+        getResponseWidget()
       ],
     );
   }
